@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
     price: {
@@ -52,7 +52,7 @@ export default (sequelize, DataTypes) => {
       as: 'orders',
     });
     Product.hasMany(models.Review, {
-      as: 'orders',
+      as: 'review',
     });
   };
   return Product;

@@ -1,5 +1,5 @@
 
-export default module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Shipping = sequelize.define('Shipping', {
     id: {
       allowNull: false,
@@ -21,7 +21,7 @@ export default module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Shipping.associate = (models) => {
-    Shipping.belongsTo(models.Shipping_Region, {
+    Shipping.belongsTo(models.ShippingRegion, {
       foreignKey: 'shippingRegionId',
       onDelete: 'CASCADE',
       as: 'shippingRegion'

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel index.js -d dist",
+    "build": "babel server -d dist",
     "start": "npm run build && nodemon dist/index.js"
   },
   "keywords": [
@@ -17,7 +17,12 @@
   "author": "Olatunji",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.5",
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.1.0"
   },

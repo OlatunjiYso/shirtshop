@@ -1111,7 +1111,7 @@ module.exports = {
         {
           id: 86,
           name: 'The Three Wise Men',
-          description: 'This is a classic rendition of one of the seasons most beloved stories, and now showing on a Christmas T-shirt for you!',
+          description: 'This beautiful angel Christmas T-shirt is awaiting the opportunity to adorn your chest!',
           price: 12.99,
           discountedPrice: 0,
           image: 'the-three-wise-men.gif',
@@ -1305,7 +1305,7 @@ module.exports = {
         },
         {
           id: 101,
-          name: 'The Promise of Spring, With Valentine\'s Day come, can Spring be far behind?',
+          name: 'The Promise of Spring, With Valentines Day come, can Spring be far behind?',
           description: 'Now were getting a bit more serious!',
           price: 21.00,
           discountedPrice: 19.50,

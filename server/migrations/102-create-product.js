@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT('long'),
         allowNull: false,
       },
       price: {

@@ -16,3 +16,6 @@ coverage
 
 # transpiled directory
 dist
+
+# Exclude .env
+.env

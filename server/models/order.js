@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Orders = sequelize.define('Orders', {
+  const Order = sequelize.define('Order', {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -42,22 +42,22 @@ export default (sequelize, DataTypes) => {
     }
   }, {});
 
-  Orders.associate = (models) => {
-    Orders.belongsTo(models.Customer, {
+  Order.associate = (models) => {
+    Order.belongsTo(models.Customer, {
       foreignKey: 'customerId',
       onDelete: 'CASCADE',
       as: 'customer'
     });
-    Orders.belongsTo(models.Shipping, {
+    Order.belongsTo(models.Shipping, {
       foreignKey: 'shippingId',
       onDelete: 'CASCADE',
       as: 'shipping'
     });
-    Orders.belongsTo(models.Tax, {
+    Order.belongsTo(models.Tax, {
       foreignKey: 'taxId',
       onDelete: 'CASCADE',
       as: 'tax'
     });
   };
-  return Orders;
+  return Order;
 };
