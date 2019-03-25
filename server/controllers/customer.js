@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import db from '../models';
+import { userInfo } from 'os';
 
 const { Customer } = db;
 
@@ -60,6 +61,61 @@ class CustomerController {
           error: err.message
         })
       })
+  }
+
+  /**
+   * @description signs in a registered customer
+   * 
+   * @param { object } req -request object.
+   * @param { object } res - response object.
+   * 
+   * @return { undefined }
+   */
+  static login(req, res) {
+    // Handle validation against null inputs in middleware
+    Customer
+        .findOne({ 
+          where: { email: req.body.email }
+        })
+        .then((customer) => {
+          if(!customer) {
+            return res.status(404)
+                .json({
+                  message: 'No such customer exixts'
+                })
+          }
+          bcrypt.compare(req.body.password, customer.password)
+          .then((validPassword) => {
+            if(!validPassword) {
+              return res.status(401)
+              .json({
+                message: 'Incorrect password'
+              })
+            }
+            // issue jsonwebtoken that lasts for 12 x 60 minutes
+            const token = jwt.sign(
+              {
+                id: customer.id,
+                email: userInfo.email
+              },
+              process.env.SECRET_KEY,
+              { expiresIn: '720m' }
+            );
+            res.status(201)
+              .json({
+                message: 'You are logged In',
+                token,
+                email: customer.email
+              });
+          })
+
+        })
+        .catch((err) => {
+          res.status(500)
+          .json({
+            error: err.message
+          })
+        });
   }
 }
 
