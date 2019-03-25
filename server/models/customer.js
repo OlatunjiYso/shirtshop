@@ -1,4 +1,4 @@
-export default module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Customer = sequelize.define('Customer', {
     id: {
       allowNull: false,
@@ -68,7 +68,7 @@ export default module.exports = (sequelize, DataTypes) => {
      onDelete: 'CASCADE',
      as: 'shippingRegion'
    });
-   Customer.hasMany(models.Orders, {
+   Customer.hasMany(models.Order, {
     as: 'orders'
   });
   Customer.hasMany(models.Review, {

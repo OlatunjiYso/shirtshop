@@ -1,5 +1,5 @@
 
-export default module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const  Audit = sequelize.define('Audit', {
     id: {
       allowNull: false,
@@ -24,7 +24,6 @@ export default module.exports = (sequelize, DataTypes) => {
     Audit.belongsTo(models.Order, {
       foreignKey: 'orderId',
       onDelete: 'CASCADE',
-      as: 'order'
     })
   };
   return Audit;
