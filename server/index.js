@@ -1,10 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
+import dotenv from 'dotenv';
 
 
 import customerController from './controllers/customer';
 import customerHandler from './routes/customer';
+
+// Load environmental variables
+dotenv.config();
 
 const app = express();
 

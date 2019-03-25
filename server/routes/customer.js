@@ -11,7 +11,12 @@ customerHandler.post(
   validator.checkEmailExistence,
   validator.checkCreditCardExistence,
   customerController.createCustomer,
-  ()=> {console.log(567)}
+);
+
+customerHandler.post(
+  '/login',
+  validator.validateLogin,
+  customerController.login,
 );
 
 

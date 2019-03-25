@@ -41,6 +41,29 @@ class Validations {
 
 
   /**
+    * @description Ensures a user signin parameters are valid
+    *
+    * @param {object} req - api request
+    * @param {object} res - api response
+    * @param {function} next - calls on the next handler
+    *
+    * @return {undefined} api response
+    */
+  static validateLogin(req, res, next) {
+    req.checkBody('email', 'Please input your email').trim().notEmpty();
+    req.checkBody('password', 'Please input password').trim().notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorList = errors.map(error => error.msg);
+      return res.status(400)
+        .send({ errors: errorList });
+    }
+    return next();
+  }
+
+
+
+  /**
      * Checks if creditcard of customer already exists.
      * @param { Object } req -request body
      * @param { Object } res -response body
@@ -55,12 +78,12 @@ class Validations {
         }
       })
       .then((user) => {
-          if (user) {
-            return res.status(409)
-              .json({
-                message: 'This credit card exist already'
-              });
-          }
+        if (user) {
+          return res.status(409)
+            .json({
+              message: 'This credit card exist already'
+            });
+        }
         return next();
       })
       .catch(err => res.status(500)
@@ -70,34 +93,34 @@ class Validations {
   }
 
 
-    /**
-     * Checks if email of customer already exists.
-     * @param { Object } req -request body
-     * @param { Object } res -response body
-     * @param {Function} next -calls on the next handler
-     * @return { undefined }
-     */
-    static checkEmailExistence(req, res, next) {
-      Customer
-        .findOne({
-          where: {
-            email: req.body.email
-          }
-        })
-        .then((user) => {
-            if (user) {
-              return res.status(409)
-                .json({
-                  message: 'This email exist already'
-                });
-            }
-          return next();
-        })
-        .catch(err => res.status(500)
-          .json({
-            message: err
-          }));
-    }
+  /**
+   * Checks if email of customer already exists.
+   * @param { Object } req -request body
+   * @param { Object } res -response body
+   * @param {Function} next -calls on the next handler
+   * @return { undefined }
+   */
+  static checkEmailExistence(req, res, next) {
+    Customer
+      .findOne({
+        where: {
+          email: req.body.email
+        }
+      })
+      .then((user) => {
+        if (user) {
+          return res.status(409)
+            .json({
+              message: 'This email exist already'
+            });
+        }
+        return next();
+      })
+      .catch(err => res.status(500)
+        .json({
+          message: err
+        }));
+  }
 }
 
 
