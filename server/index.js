@@ -4,8 +4,8 @@ import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
 
 
-import customerController from './controllers/customer';
 import customerHandler from './routes/customer';
+import productHandler from './routes/product';
 
 // Load environmental variables
 dotenv.config();
@@ -21,6 +21,7 @@ app.use(expressValidator());
 
 // Route incoming request to appropriate handlers
 app.use('/api/v1/customers/', customerHandler);
+app.use('/api/v1/products/', productHandler);
 
 // Set listening port
 app.listen(3000, () => {
