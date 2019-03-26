@@ -13,8 +13,7 @@ export default (sequelize, DataTypes) => {
     }
 
   }, {});
-  ProductCategory.associate = function(models) {
-    // associations can be defined here
+  ProductCategory.associate = (models) => {
   };
   return ProductCategory;
 };
