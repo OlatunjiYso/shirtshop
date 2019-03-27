@@ -7,7 +7,17 @@ const productHandler = express.Router();
 productHandler.get(
   '/',
   productController.getAllProducts
-)
+);
+
+productHandler.get(
+  '/category',
+  productController.getCategories
+);
+
+productHandler.get(
+  '/category_product',
+  productController.getCategoryProducts
+);
 
 
 
