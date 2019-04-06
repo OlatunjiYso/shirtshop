@@ -10,6 +10,11 @@ productHandler.get(
 );
 
 productHandler.get(
+  '/:id',
+  productController.getProduct
+);
+
+productHandler.get(
   '/category',
   productController.getCategories
 );
