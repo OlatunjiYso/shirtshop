@@ -4,9 +4,10 @@
   "description": "An ecommerce project for shirt shop",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "PORT=1234 NODE_ENV=test mocha server/test/ --require babel-register",
     "build": "babel server -d dist",
-    "start": "npm run build && nodemon dist/index.js"
+    "start": "npm run build && nodemon dist/index.js",
+    "migrate-test": "s"
   },
   "keywords": [
     "Node",
@@ -24,10 +25,15 @@
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.6.5",
+    "q": "^1.5.1",
     "sequelize": "^5.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^6.0.2"
   }
 }
