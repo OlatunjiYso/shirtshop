@@ -19,16 +19,10 @@ class Validations {
     */
   static validateSignup(req, res, next) {
     req.checkBody('name', 'Please input your name').trim().notEmpty();
-    req.checkBody('shippingRegionId', 'Please input shippingRegionId').trim().notEmpty();
     req.checkBody('email', 'email is required').notEmpty();
     req.checkBody('email', 'Invalid email').isEmail();
     req.checkBody('password', 'Please input password').trim().notEmpty();
     req.checkBody('password', 'password must be a min length of 5').isLength({ min: 5 });
-    req.checkBody('creditCard', 'Please the creditcard details').trim().notEmpty();
-    req.checkBody('address1', 'Please input the first address').trim().notEmpty();
-    req.checkBody('address2', 'Please input the second address').trim().notEmpty();
-    req.checkBody('city', 'Please input your city').trim().notEmpty();
-    req.checkBody('religion', 'Please input your religion').trim().notEmpty();
 
     const errors = req.validationErrors();
     if (errors) {
@@ -38,7 +32,6 @@ class Validations {
     }
     return next();
   }
-
 
   /**
     * @description Ensures a user signin parameters are valid
@@ -71,6 +64,9 @@ class Validations {
      * @return { undefined }
      */
   static checkCreditCardExistence(req, res, next) {
+    if(!req.body.creditCard) {
+      return next();
+    }
     Customer
       .findOne({
         where: {
@@ -79,6 +75,9 @@ class Validations {
       })
       .then((user) => {
         if (user) {
+          if (user.id == req.user.id) {
+            return next()
+          }
           return res.status(409)
             .json({
               message: 'This credit card exist already'
@@ -120,6 +119,76 @@ class Validations {
         .json({
           message: err
         }));
+  }
+
+  /**
+   * 
+   * @param { object } req -request object
+   * @param { object } res -response object
+   * @param { function } next -next method to be called.
+   */
+  static validateCartInputs(req, res, next) {
+    req.checkBody('productId', 'Product Id  cannot be null').trim().notEmpty();
+    req.checkBody('attributes', 'Product should have some attributes').trim().notEmpty();
+    req.checkBody('quantity', 'quantity cannot be null').trim().notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorList = errors.map(error => error.msg);
+      return res.status(400)
+        .send({ errors: errorList });
+    }
+    return next();
+  }
+
+  /**
+   * @description - validates an order that is to be created
+   * 
+   * @param { object } req - request object
+   * @param { object } res - response object
+   * @param { funtion } next - next method to call on
+   * 
+   */
+  static validateOrder(req, res, next) {
+    req.checkBody('shippingId', 'shippingId cannot be null').trim().notEmpty();
+    req.checkBody('totalAmount', 'totalAmount cannot be null').trim().notEmpty();
+    req.checkBody('status', 'status cannot be null').trim().notEmpty();
+    req.checkBody('comment', 'comment cannot be null').trim().notEmpty();
+    req.checkBody('authCode', 'authCode cannot be null').trim().notEmpty();
+    req.checkBody('reference', 'reference cannot be null').trim().notEmpty();
+    req.checkBody('productId', 'productId cannot be null').trim().notEmpty();
+    req.checkBody('attribute', 'attribute cannot be null').trim().notEmpty();
+    req.checkBody('productName', 'productName cannot be null').trim().notEmpty();
+    req.checkBody('unitCost', 'unitCost cannot be null').trim().notEmpty();
+    req.checkBody('quantity', 'quantity cannot be null').trim().notEmpty();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorList = errors.map(error => error.msg);
+      return res.status(400)
+        .send({ errors: errorList });
+    }
+    return next();
+  }
+
+
+    /**
+   * @description - validates requests for categories in  a department
+   * 
+   * @param { object } req - request object
+   * @param { object } res - response object
+   * @param { funtion } next - next method to call on
+   * 
+   */
+  static validateFetchCategories(req, res, next) {
+    let departmentId = parseInt(req.params.departmentId);
+    if  (typeof departmentId != 'number') {
+      return res.status(400)
+      .json({
+        message: 'please enter a valid departmentId'
+      })
+    }
+    return next();
   }
 }
 

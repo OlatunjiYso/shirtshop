@@ -39,14 +39,14 @@ export default (sequelize, DataTypes) => {
   }, {});
   Product.associate = (models) => {
     Product.belongsToMany(models.AttributeValue, {
-      through: 'Product_Attribute',
+      through: 'ProductAttribute',
       foreignKey: 'productId',
       as: 'attributes'
     });
     Product.belongsToMany(models.Customer, {
-      through: 'Shopping_Cart',
+      through: 'ShoppingCart',
       foreignKey: 'productId',
-      as: 'products'
+      as: 'customers'
     });
     Product.hasMany(models.OrderDetail, {
       as: 'orders',

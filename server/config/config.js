@@ -3,9 +3,17 @@ dotenv.config();
 
 module.exports = {
   development: {
-    username: 'root', //process.env.LOCAL_DB_USERNAME,
-    password: 'password', //process.env.LOCAL_DB_PASSWORD,
-    database: 'shirtshop',
+    username: process.env.LOCAL_DB_USERNAME,
+    password: process.env.LOCAL_DB_PASSWORD,
+    database: process.env.LOCAL_DB,
+    host: '127.0.0.1',
+    dialect: 'mysql'
+  },
+
+  test: {
+    username: process.env.LOCAL_TEST_DB_USERNAME,
+    password: process.env.LOCAL_TEST_DB_PASSWORD,
+    database: process.env.LOCAL_TEST_DB,
     host: '127.0.0.1',
     dialect: 'mysql'
   }

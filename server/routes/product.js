@@ -10,15 +10,9 @@ productHandler.get(
 );
 
 productHandler.get(
-  '/category',
-  productController.getCategories
+  '/:id',
+  productController.getProduct
 );
-
-productHandler.get(
-  '/category_product',
-  productController.getCategoryProducts
-);
-
 
 
 export default productHandler;
