@@ -27,39 +27,35 @@ class CustomerController {
     // Handle the rest of validation in a middleware .. . 
 
     // Get parameters from the request body
-    const {
-      shippingRegionId, name, email, creditCard, address1, address2, city, religion, postalCode, dayPhone, evePhone, mobPhone
-    } = req.body
+    const { name, email } = req.body
 
     Customer
       .create({
-        shippingRegionId,
         name,
         email,
         password,
-        creditCard,
-        address1,
-        address2,
-        city,
-        religion,
-        postalCode,
-        dayPhone,
-        evePhone,
-        mobPhone
       })
       .then((customer) => {
+        // create token that lasts for 12 x 60 minutes
+        const token = jwt.sign(
+          {
+            id: customer.id,
+            email
+          },
+          process.env.SECRET_KEY,
+          { expiresIn: '720m' }
+        );
         res.status(201)
-        .json({
-          message: 'You are signed up!',
-          email: customer.email,
-          id: customer.id,
-        })
+          .json({
+            message: 'You are signed up!',
+            token
+          })
       })
       .catch((err) => {
         res.status(500)
-        .json({
-          error: err.message
-        })
+          .json({
+            error: err.message
+          })
       })
   }
 
@@ -73,30 +69,31 @@ class CustomerController {
    */
   static login(req, res) {
     // Handle validation against null inputs in middleware
+    const { email } = req.body;
     Customer
-        .findOne({ 
-          where: { email: req.body.email }
-        })
-        .then((customer) => {
-          if(!customer) {
-            return res.status(404)
-                .json({
-                  message: 'No such customer exixts'
-                })
-          }
-          bcrypt.compare(req.body.password, customer.password)
+      .findOne({
+        where: { email }
+      })
+      .then((customer) => {
+        if (!customer) {
+          return res.status(404)
+            .json({
+              message: 'No such customer exixts'
+            })
+        }
+        bcrypt.compare(req.body.password, customer.password)
           .then((validPassword) => {
-            if(!validPassword) {
+            if (!validPassword) {
               return res.status(401)
-              .json({
-                message: 'Incorrect password'
-              })
+                .json({
+                  message: 'Incorrect password'
+                })
             }
             // issue jsonwebtoken that lasts for 12 x 60 minutes
             const token = jwt.sign(
               {
                 id: customer.id,
-                email: userInfo.email
+                email
               },
               process.env.SECRET_KEY,
               { expiresIn: '720m' }
@@ -104,18 +101,64 @@ class CustomerController {
             res.status(201)
               .json({
                 message: 'You are logged In',
-                token,
-                email: customer.email
+                token
               });
           })
 
-        })
-        .catch((err) => {
-          res.status(500)
+      })
+      .catch((err) => {
+        res.status(503)
           .json({
             error: err.message
           })
-        });
+      });
+  }
+
+
+  /**
+   * @description - a method that completes the details of a user
+   * 
+   * @param { object } req - request object
+   * @param { object } res - response object
+   * 
+   * @return { json } json object.
+   */
+  static updateCustomerDetail(req, res) {
+    const { id } = req.user;
+    const { shippingRegionId, creditCard, address1, address2, city, religion, postalCode, dayPhone, evePhone, mobPhone } = req.body;
+    Customer
+      .findOne({
+        where: {
+          id
+        }
+      })
+      .then((customer) => {
+        customer
+          .update({
+            shippingRegionId,
+            creditCard,
+            address1,
+            address2,
+            city,
+            religion,
+            postalCode,
+            dayPhone,
+            evePhone,
+            mobPhone
+          })
+          .then((udated) => {
+            return res.status(200)
+            .json({
+              message: 'details updated!'
+            })
+          })
+      })
+      .catch((err) => {
+        res.status(503)
+        .json({
+          message: 'internal server errror'
+        })
+      });
   }
 }
 
