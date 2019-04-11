@@ -14,16 +14,5 @@ productHandler.get(
   productController.getProduct
 );
 
-productHandler.get(
-  '/category',
-  productController.getCategories
-);
-
-productHandler.get(
-  '/category_product',
-  productController.getCategoryProducts
-);
-
-
 
 export default productHandler;

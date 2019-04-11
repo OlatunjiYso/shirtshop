@@ -2,6 +2,7 @@ import express from 'express';
 
 import customerController from '../controllers/customer';
 import validator from '../middleware/validations';
+import authenticate from '../middleware/authentication';
 
 const customerHandler = express.Router();
 
@@ -9,9 +10,15 @@ customerHandler.post(
   '/signup',
   validator.validateSignup,
   validator.checkEmailExistence,
-  validator.checkCreditCardExistence,
   customerController.createCustomer,
 );
+
+customerHandler.put(
+  '/details',
+  authenticate,
+  validator.checkCreditCardExistence,
+  customerController.updateCustomerDetail
+)
 
 customerHandler.post(
   '/login',
