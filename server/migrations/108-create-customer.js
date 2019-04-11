@@ -8,7 +8,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       shippingRegionId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         defaultValue: 1
       },
@@ -25,28 +24,22 @@ module.exports = {
         allowNull: false
       },
       creditCard: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        type: Sequelize.TEXT
       },
       address1: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        type: Sequelize.TEXT
       },
       address2: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        type: Sequelize.TEXT
       },
       city: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       religion: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       postalCode: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       dayPhone: {
         type: Sequelize.STRING,
