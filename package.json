@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "PORT=1234 NODE_ENV=test mocha server/test/ --require babel-register",
-    "build": "babel server -d dist",
-    "start": "npm run build && nodemon dist/index.js",
+    "build": "babel ./server/src -d ./server/dist",
+    "start": "npm run build && nodemon server/dist/index.js",
     "webpack-serve": "webpack-dev-server --config ./client/webpack.config.js --mode development",
     "webpack-build": "webpack --config ./client/webpack.config.js"
   },
@@ -33,9 +33,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-cli": "^6.26.0",
+    "@babel/cli": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
