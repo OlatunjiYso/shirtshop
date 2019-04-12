@@ -39,7 +39,6 @@ class CartController {
         })
       })
       .catch((err) => {
-        console.log(err)
         res.status(501)
         .json({
           message: 'internal server error',
