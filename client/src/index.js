@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './app';
 
-const title = 7 * 765;
 
 ReactDOM.render(
-  <div>{title}</div>,
+ <App />,
   document.getElementById('app')
 );
 
