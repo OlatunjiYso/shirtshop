@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import { Route, Switch } from "react-router-dom";
 /* eslint-disable no-unused-vars */
 import styles from './styles.css';
 /* eslint-enable no-unused-vars */
 
-import Nav from './components/navbar';
+import NavBar from './components/navbar';
 import Footer from './components/footer';
-import Current from './components/catalogSideNav';
+import Login from './containers/Login';
+import Signup from './components/signup';
+
 class App extends Component {
 
   /**
@@ -17,20 +18,20 @@ class App extends Component {
    * @memberof App Component 
    */
   render() {
-      return (
-          <div>
-            <Nav />
-            <Current />
-            <Footer />
-          </div>
-      )
-
+    return (
+      <div>
+        <NavBar />
+        <div>
+          <Switch>
+            <Route exact path='/' component={Login} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
+    )
   }
 }
-
-App.propTypes = {
-  name: PropTypes.string
-}
-
 
 export default App;

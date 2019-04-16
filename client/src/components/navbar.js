@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const navbar = () => {
+const appnav = () => {
   return (
     <div className="navBody">
       <div className="leftNavbar">
@@ -21,8 +21,8 @@ const navbar = () => {
   )
 }
 
-navbar.propTypes = {
+appnav.propTypes = {
   name: propTypes.string,
 };
 
-export default navbar;
+export default appnav;

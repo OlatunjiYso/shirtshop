@@ -44,6 +44,7 @@ class Validations {
     */
   static validateLogin(req, res, next) {
     req.checkBody('email', 'Please input your email').trim().notEmpty();
+    req.checkBody('email', 'Invalid email').isEmail();
     req.checkBody('password', 'Please input password').trim().notEmpty();
     const errors = req.validationErrors();
     if (errors) {

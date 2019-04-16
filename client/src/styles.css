@@ -406,3 +406,10 @@ transition: 0.3s;
   color: wheat;
   cursor: pointer;
 }
+
+/* utility styles */
+.white-text {
+  color: rgb(207, 206, 206);
+  text-decoration: none;
+  font-style: italic;
+}
