@@ -76,9 +76,9 @@ class CustomerController {
       })
       .then((customer) => {
         if (!customer) {
-          return res.status(404)
+          return res.status(401)
             .json({
-              message: 'No such customer exixts'
+              message: 'Oops😟Invalid email or password'
             })
         }
         bcrypt.compare(req.body.password, customer.password)
@@ -86,7 +86,7 @@ class CustomerController {
             if (!validPassword) {
               return res.status(401)
                 .json({
-                  message: 'Incorrect password'
+                  message: 'Oops😟Invalid email or password'
                 })
             }
             // issue jsonwebtoken that lasts for 12 x 60 minutes
@@ -98,9 +98,9 @@ class CustomerController {
               process.env.SECRET_KEY,
               { expiresIn: '720m' }
             );
-            res.status(201)
+            res.status(200)
               .json({
-                message: 'You are logged In',
+                message: 'You are logged in 😃',
                 token
               });
           })

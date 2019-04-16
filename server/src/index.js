@@ -23,6 +23,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Use expressValidator for input validation
 app.use(expressValidator());
 
+// Allow cors
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, token');
+  next();
+});
+
 // Route incoming request to appropriate handlers
 app.use('/api/v1/customers/', customerHandler);
 app.use('/api/v1/products/', productHandler);

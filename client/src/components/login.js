@@ -1,9 +1,12 @@
 import React from 'react';
-// import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
-const login = () => {
+const LoginForm = (props) => {
+  const { handleChange, handleSubmit, user } = props;
+  const { email, password } = user;
   return (
-    <main id="auth">
+    <div onSubmit={handleSubmit} id="auth">
       <div>
         <h1 className="authheader"> Welcome Back!</h1>
       </div>
@@ -11,9 +14,23 @@ const login = () => {
       <div className="authFormBody">
         <form className="authForm">
           <label> Email </label>
-          <input type="email" />
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={handleChange}
+            required
+          />
           <label> Password </label>
-          <input type="password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={handleChange}
+            required
+          />
           <input
             type="submit"
             value="Submit"
@@ -21,9 +38,17 @@ const login = () => {
           />
         </form>
       </div>
-      <p className="authRedirect"> Got no account ? Signup here </p>
-    </main>
+      <p className="authRedirect">
+       Got no account ?  Signup 
+       <Link to="/signup" className="white-text"> here</Link>
+      </p>
+    </div>
   )
 }
 
-export default login;
+LoginForm.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+};
+export default LoginForm;
