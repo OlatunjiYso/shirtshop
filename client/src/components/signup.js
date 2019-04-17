@@ -1,7 +1,12 @@
 import React from 'react';
-// import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-const signup = () => {
+const signup = (props) => {
+  const { handleChange, handleSubmit, user, passwordCheck } = props;
+  const { email, password, confirmPassword, name} = user;
+  const passwordMismatch = passwordCheck ? 
+  <span className="white-text"> No match ❌</span> :
+  null;
   return (
     <main id="auth">
       <div>
@@ -9,28 +14,58 @@ const signup = () => {
       </div>
       <h6 className="authFormTitle"> Signup </h6>
       <div className="authFormBody">
-        <form className="authForm">
-          <label> First name </label>
-          <input type="text" />
-          <label> Last name </label>
-          <input type="text" />
+        <form className="authForm" onSubmit={handleSubmit} >
+          <label> Full name </label>
+          <input
+           type="text" 
+           name="name"
+           value={name}
+           onChange={handleChange}
+           required 
+           />
+          
           <label> Email </label>
-          <input type="email" />
+          <input 
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          required 
+          />
           <label> Password </label>
-          <input type="password" />
-          <label> Confirm Password </label>
-          <input type="password" />
+          <input
+           type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            required
+            />
+          <label> Confirm Password {passwordMismatch}</label>
+          <input
+           type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={handleChange}
+            required
+            />
           <input
             type="submit"
             value="Submit"
+            disabled={passwordCheck}
             className="authSubmit"
           />
         </form>
       </div>
       <p className="authRedirect"> Got an account ?  login 👉🏽here </p>
     </main>
-
   )
 }
+
+signup.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  checkPassword: PropTypes.bool.isRequired
+};
 
 export default signup;

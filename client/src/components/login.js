@@ -6,18 +6,17 @@ const LoginForm = (props) => {
   const { handleChange, handleSubmit, user } = props;
   const { email, password } = user;
   return (
-    <div onSubmit={handleSubmit} id="auth">
+    <div id="auth">
       <div>
         <h1 className="authheader"> Welcome Back!</h1>
       </div>
       <h6 className="authFormTitle"> Login </h6>
       <div className="authFormBody">
-        <form className="authForm">
+        <form className="authForm" onSubmit={handleSubmit} >
           <label> Email </label>
           <input
             type="email"
             name="email"
-            placeholder="email"
             value={email}
             onChange={handleChange}
             required
@@ -26,7 +25,6 @@ const LoginForm = (props) => {
           <input
             type="password"
             name="password"
-            placeholder="password"
             value={password}
             onChange={handleChange}
             required

@@ -7,7 +7,7 @@ import styles from './styles.css';
 import NavBar from './components/navbar';
 import Footer from './components/footer';
 import Login from './containers/Login';
-import Signup from './components/signup';
+import Signup from './containers/Signup';
 
 class App extends Component {
 
@@ -23,9 +23,9 @@ class App extends Component {
         <NavBar />
         <div>
           <Switch>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/home' component={Login} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/' component={Signup} />
           </Switch>
         </div>
         <Footer />
