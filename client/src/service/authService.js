@@ -29,7 +29,6 @@ class AuthService {
    * @param {object} user  - user information from form.
    */
   static signup(user) {
-    const { password, confirmPassword } = user;
    axios.post(`${rootUrl}/signup`, (user))
    .then((res) => {
      alertify.set('notifier', 'position', 'top-center');

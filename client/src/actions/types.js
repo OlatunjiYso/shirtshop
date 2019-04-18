@@ -1,0 +1,11 @@
+export const SET_DEPARTMENT = 'SET_DEPARTMENT';
+
+export const SET_DEPARTMENTS = 'SET_DEPARTMENTS';
+
+export const SET_CATEGORY = 'SET_CATEGORY';
+
+export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+export const SET_SHIRTS = 'SET_SHIRTS';
+
+export const SET_CURRENT_SHIRT = 'SET_CURRENT_SHIRT';
