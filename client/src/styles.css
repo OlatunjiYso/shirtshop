@@ -134,12 +134,68 @@ main {
   color: white;
 }
 
-/* shirtCard styles */
-/* shirtCard styles */
-/* shirtCard styles */
+/* Catalog styles  */
+/* Catalog styles */
+/* Catalog styles */
+.catalogBody {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+.catalogCardsSection {
+  width: 80%;
+  margin: 2px auto;
+  display: flex;
+  flex-direction: column;
+}
+.catalogCardHeader {
+  text-align: center;
+  font-size: 30px;
+}
+.catalogCards {
+  margin: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center
+}
 
+
+/* pagination Styles 😎 */
+/* pagination Styles */
+/* pagination Styles */
+.paginationItem{
+  width: 40px;
+  height: 40px;
+  background: rgb(231, 231, 231);
+  color: rgb(70, 22, 50);
+  margin: 5px 10px;
+  text-align: center;
+  vertical-align: center;
+  cursor: pointer;
+}
+.paginationItem:hover{
+  background: rgb(70, 22, 50);
+  color: rgb(231, 231, 231);
+}
+.paginationItem:active {
+  color: yellow;
+}
+.paginationItems{
+  display: flex;
+}
+.paginationBody{
+  margin: 20px auto 60px auto;
+  display:flex;
+  flex-direction:row;
+  justify-content: center
+}
+
+/* shirtCard styles */
+/* shirtCard styles */
+/* shirtCard styles */
 .shirtCardBody {
-  margin:100px;
+  margin:30px 10px;
   width: 250px;
   height: 300px;
   border: 2px solid rgb(133, 5, 58);
@@ -156,7 +212,6 @@ main {
   display: block;
   margin: 10px auto;
 }
-
 .shirtCardName {
   text-align: center ;
   font-size: 20px;

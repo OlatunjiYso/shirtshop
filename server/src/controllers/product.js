@@ -31,11 +31,11 @@ class ProductsController {
         },
       })
       .then((product) => {
-        if(!product) {
+        if (!product) {
           return res.status(404)
-          .json({
-            message: 'no such products found!'
-          })
+            .json({
+              message: 'no such products found!'
+            })
         }
         foundProduct = product;
         ProductAttribute
@@ -143,18 +143,28 @@ class ProductsController {
    * @return { json }  message
    */
   static getAllProducts(req, res) {
-    Product
-      .findAll({
-        limit: 50,
-      })
-      .then((products) => {
-        if (products) {
-          return res.status(200)
-            .json({
-              message: 'products found!',
-              products,
-            })
-        }
+    const limit = 12;
+    let offset = 0;
+    Product.findAndCountAll()
+      .then((allProducts) => {
+        const { page } = req.query;
+        const pages = Math.ceil(allProducts.count / limit);
+        offset = (page > 1) ? limit * (page - 1) : 0;
+        Product
+          .findAll({
+            limit,
+            offset
+          })
+          .then((products) => {
+            if (products) {
+              return res.status(200)
+                .json({
+                  message: 'products found!',
+                  products,
+                  pages
+                })
+            }
+          })
       })
       .catch((err) => {
         res.status(500)

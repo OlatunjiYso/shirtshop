@@ -8,6 +8,7 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
+import ProductCatalog from './containers/ProductCatalog';
 
 class App extends Component {
 
@@ -25,7 +26,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/home' component={Login} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/' component={Signup} />
+            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/' component={ProductCatalog} />
           </Switch>
         </div>
         <Footer />

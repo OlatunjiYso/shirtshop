@@ -1,31 +1,51 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const catSideNav = () => {
+const catSideNav = (props) => {
+  let { departments,
+    categories,
+    changeDepartment,
+    currentDepartment,
+    changeCategory } = props
+
+  const departmentOptions = departments.map((department) => {
+    return (
+      <option
+        key={department.id} value={department.id} >
+        {department.name}
+      </option>
+    )
+  });
+
+  const categoryListItems = categories.map((category) => {
+    return (
+      <li className="categoryItem" key={category.id} value={category.id}  >
+        {category.name}
+      </li>
+    )
+  })
   return (
     <div className="catSideNavBody">
       <div className="departmentpics">
         <h1> 🌆</h1>
       </div>
-      <select id="departmentSelect">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+      <select id="departmentSelect" value={currentDepartment} onChange={changeDepartment}>
+        <option value="department">Department</option>
+        {departmentOptions}
       </select>
-      <ul className="categoryItems">
-        <li className="categoryItem" > category 1</li>
-        <li className="categoryItem" > category 2</li>
-        <li className="categoryItem" > category 3</li>
-        <li className="categoryItem" > category 4</li>
+      <ul className="categoryItems" onClick={changeCategory}>
+        {categoryListItems}
       </ul>
-
     </div>
   )
 }
 
 catSideNav.propTypes = {
-  name: propTypes.string,
+  departments: propTypes.array,
+  categories: propTypes.array,
+  changeDepartment: propTypes.func.isRequired,
+  currentDepartment: propTypes.string.isRequired,
+  changeCategory: propTypes.func.isRequired,
 };
 
 export default catSideNav;
