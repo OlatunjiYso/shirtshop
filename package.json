@@ -36,7 +36,9 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.1.0"
+    "sequelize": "^5.1.0",
+    "webpack-dev-middleware": "^3.6.2",
+    "webpack-hot-middleware": "^2.24.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

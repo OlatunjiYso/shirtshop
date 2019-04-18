@@ -28,8 +28,8 @@ class App extends Component {
             <Route exact path='/home' component={Login} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
-            <Route exact path='/catalog' component={ProductCatalog} />
-            <Route exact path='/' component={ProductDetails} />
+            <Route exact path='/' component={ProductCatalog} />
+            <Route exact path='/product/:id' component={ProductDetails} />
           </Switch>
         </div>
         <Footer />
