@@ -2,6 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
+import path from 'path';
+import webpack from 'webpack';
+//Allow client side rendering
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 
 import customerHandler from './routes/customer';
@@ -11,11 +16,20 @@ import  departmentHandler from './routes/department';
 import cartHandler from './routes/cart';
 import orderHandler from './routes/order';
 import notFoundHandler from './routes/notFound';
+import webpackConfig from '../../client/webpack.config';
+
+const compiler = webpack(webpackConfig);
 
 // Load environmental variables
 dotenv.config();
 
+// Import Single page html
+const indexFile = path.join(__dirname, '../../client/dist/index.html');
+
 const app = express();
+//use webpack middleware to intercept client routes
+app.use(webpackMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));
 
 // Parse incoming requests data.
 app.use(bodyParser.json());
@@ -40,7 +54,15 @@ app.use('/api/v1/categories/', categoryHandler);
 app.use('/api/v1/departments/', departmentHandler);
 app.use('/api/v1/carts', cartHandler);
 app.use('/api/v1/orders', orderHandler);
-app.use('*', notFoundHandler);
+app.use('/api/*', notFoundHandler);
+
+app.get('/*', (req, res) => {
+  res.sendFile(indexFile, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 // Set listening port
 app.listen(process.env.PORT || 3000, () => {

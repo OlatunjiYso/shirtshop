@@ -28,7 +28,8 @@ class ProductDetails extends Component {
   * @description - runs after page loads
   */
   componentDidMount() {
-    this.props.fetchShirt(13);
+    const { id } = this.props.match.params
+    this.props.fetchShirt(id);
   }
 
   /**
@@ -112,6 +113,7 @@ const mapDispatchToProps = dispatch => {
 ProductDetails.propTypes = {
   productData: PropTypes.object.isRequired,
   fetchShirt: PropTypes.func.isRequired,
+  match: PropTypes.any,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

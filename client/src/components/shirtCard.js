@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 // import { prototype } from 'events';
 
 const shirtCard = (props) => {
@@ -9,11 +9,13 @@ const shirtCard = (props) => {
   const refinedName = (name.length <= 18) ?
    name : name.slice(0, 16) + ' ...'
   return (
-    <div className="shirtCardBody" key={id}>
+    <Link to={`/product/${id}`}>
+    <div className="shirtCardBody" key={id} >
         <img  src={require(`../images/products/${imageUrl}`)} />
       <h6 className="shirtCardName"> {refinedName}</h6>
       <h5 className="shirtCardPrice"> ${ price }</h5>
     </div>
+    </Link>
   )
 }
 

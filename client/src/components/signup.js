@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const signup = (props) => {
   const { handleChange, handleSubmit, user, passwordCheck } = props;
@@ -56,7 +57,7 @@ const signup = (props) => {
           />
         </form>
       </div>
-      <p className="authRedirect"> Got an account ?  login 👉🏽here </p>
+      <p className="authRedirect"> Got an account ?  login 👉🏽<Link to="/login" className="white-text" > here </Link> </p>
     </main>
   )
 }

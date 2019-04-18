@@ -7,7 +7,8 @@ module.exports = {
     password: process.env.LOCAL_DB_PASSWORD,
     database: process.env.LOCAL_DB,
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false
   },
 
   test: {
@@ -15,6 +16,7 @@ module.exports = {
     password: process.env.LOCAL_TEST_DB_PASSWORD,
     database: process.env.LOCAL_TEST_DB,
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false
   }
 }
