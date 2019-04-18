@@ -9,7 +9,7 @@ const initialState = {
   categories: [],
   currentCategory: 'All',
   shirts: [],
-  currentShirt: {},
+  currentShirt: null,
   pages: 8
 };
 const productReducer = (state = initialState, action) => {

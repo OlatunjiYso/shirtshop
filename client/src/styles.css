@@ -250,6 +250,7 @@ justify-content: space-evenly;
 }
 .itemDescription {
   border-bottom: 1px solid rgb(185, 185, 185);
+  font-size: 22px;
 }
 .imageTitle {
   align-content: center;
@@ -360,31 +361,31 @@ justify-content: space-evenly;
   color: rgb(75, 75, 75);
   margin: 20px 15px ;
 }
-#whiteColor {
+#colorWhite {
   background: white;
 }
-#blackColor {
+#colorBlack {
   background: black;
 }
-#redColor {
+#colorRed{
   background: red;
 }
-#orangeColor {
+#colorOrange {
   background: orange;
 }
-#yellowColor {
+#colorYellow {
   background: yellow;
 }
-#blueColor {
+#colorBlue {
   background: blue;
 }
-#greenColor {
+#colorGreen {
   background: green;
 }
-#indigoColor {
+#colorIndigo {
   background: indigo;
 }
-#purpleColor {
+#colorPurple {
   background: purple;
 }
 

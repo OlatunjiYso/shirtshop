@@ -24,7 +24,15 @@ class ProductCatalog extends Component {
     this.changeCategory = this.changeCategory.bind(this);
     this.getPaginatedView = this.getPaginatedView.bind(this);
   }
-
+ /**
+   * @description - runs after page loads
+   */
+  componentDidMount() {
+    const pageNumber = 1;
+    this.props.fetchAllShirts(pageNumber);
+    this.props.fetchDepartments();
+    this.props.fetchCategories(1);
+  }
   /**
    * @description handles change department
    *
@@ -49,16 +57,6 @@ class ProductCatalog extends Component {
   changeCategory(event) {
    const { value } = event.target;
    this.props.fetchProductsInCategory(value);
-  }
-
-  /**
-   * @description - runs after page loads
-   */
-  componentDidMount() {
-    const pageNumber = 1;
-    this.props.fetchAllShirts(pageNumber);
-    this.props.fetchDepartments();
-    this.props.fetchCategories(1);
   }
 
   /**
@@ -94,7 +92,6 @@ class ProductCatalog extends Component {
 
 const mapStateToProps = state => {
   const productData = state;
-  console.log(productData);
   return {
     productData
   };
