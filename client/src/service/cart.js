@@ -1,6 +1,6 @@
 import axios from 'axios';
 import alertify from 'alertifyjs';
-const rootUrl = 'http://localhost:5000/api/v1/carts';
+const rootUrl = 'api/v1/carts';
 
 class CartService {
 
