@@ -6,7 +6,7 @@
   "scripts": {
     "test": "PORT=1234 NODE_ENV=test mocha server/test/ --require babel-register",
     "build": "babel ./server/src -d ./server/dist",
-    "start": "npm run build && node server/dist/index.js",
+    "start": "npm run build && npm run webpack-build && node server/dist/index.js",
     "webpack-serve": "webpack-dev-server --config ./client/webpack.config.js --mode development",
     "webpack-build": "webpack --config ./client/webpack.config.js",
     "run-migrations": "sequelize db:migrate",
