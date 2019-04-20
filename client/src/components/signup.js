@@ -66,7 +66,7 @@ signup.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  checkPassword: PropTypes.bool.isRequired
+  checkPassword: PropTypes.bool
 };
 
 export default signup;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { fetchShirt } from '../actions/product';
 import DetailsCard from '../components/shirtDetail';
+import cartService from '../service/cart';
 
 /**
  * @class Login
@@ -17,11 +18,13 @@ class ProductDetails extends Component {
     this.state = {
       chosenColor: 'Green',
       chosenSize: 'XL',
-      chosenQuantity: 1
+      chosenQuantity: 1,
+      id: 0
     }
     this.setChosenColor = this.setChosenColor.bind(this);
     this.setChosenSize = this.setChosenSize.bind(this);
     this.setChosenQuantity = this.setChosenQuantity.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   /**
@@ -30,6 +33,9 @@ class ProductDetails extends Component {
   componentDidMount() {
     const { id } = this.props.match.params
     this.props.fetchShirt(id);
+    this.setState({
+      ...this.state, id: id
+    })
   }
 
   /**
@@ -68,8 +74,16 @@ class ProductDetails extends Component {
       ...this.state, 'chosenSize': value
     })
   }
-  
 
+  /**
+   * @description - adds a new item to cart.
+   */
+  addItemToCart() {
+    const { id, chosenColor, chosenQuantity, chosenSize } = this.state;
+    const attributes = chosenColor + ', ' + chosenSize;
+    const item = {productId: id, attributes, quantity: chosenQuantity,buyNow: false};
+    cartService.addItem(item);
+  }
 
   /**
    * @description renders the Details page.
@@ -89,6 +103,7 @@ class ProductDetails extends Component {
           setChosenColor={this.setChosenColor}
           setChosenSize={this.setChosenSize}
           setChosenQuantity={this.setChosenQuantity}
+          addItemToCart={this.addItemToCart}
         />
       </div>
     );
@@ -97,7 +112,7 @@ class ProductDetails extends Component {
 
 
 const mapStateToProps = state => {
-  const productData = state;
+  const productData = state.products;
   return {
     productData
   };

@@ -4,12 +4,15 @@ import { Route, Switch } from "react-router-dom";
 import styles from './styles.css';
 /* eslint-enable no-unused-vars */
 
-import NavBar from './components/navbar';
+import NavBar from './containers/NavBar';
 import Footer from './components/footer';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import ProductCatalog from './containers/ProductCatalog';
 import ProductDetails from './containers/ProductDetails';
+import Checkout from './components/checkout'
+import Cart from './containers/Cart';
+import NotFound from './components/notFound';
 
 class App extends Component {
 
@@ -30,6 +33,9 @@ class App extends Component {
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/' component={ProductCatalog} />
             <Route exact path='/product/:id' component={ProductDetails} />
+            <Route exact path='/checkout' component={Checkout} />
+            <Route exact path='/cart' component={Cart} />
+            <Route component={NotFound}/>
           </Switch>
         </div>
         <Footer />

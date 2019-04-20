@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import sampleShirt from '../images/shirt.png';
+import { Link } from 'react-router-dom'
 
 const shirtDetail = (props) => {
   const {
@@ -11,28 +10,36 @@ const shirtDetail = (props) => {
     chosenQuantity,
     setChosenColor,
     setChosenSize,
-    setChosenQuantity } = props;
+    setChosenQuantity,
+    addItemToCart
+  } = props;
   if (shirtDetails) {
     // Fetch shirt parameters
     const { name, id, image, price, discountedPrice, description } = shirtDetails.foundProduct;
     const { attributes } = shirtDetails;
 
-    let availableColors = [];
-    let availableSizes = [];
-    attributes.map((attribute) => {
-      if (attribute['Size']) {
-        availableSizes.push(attribute['Size'])
-      }
-      if (attribute['Color']) {
-        availableColors.push(attribute['Color'])
-      }
-    })
+
+    // let availableSizes = [];
+    // let availableColors = []
+    // attributes.map((attribute) => {
+    //   if (attribute['Size']) {
+    //     availableSizes.push(attribute['Size'])
+    //   }
+    //   if (attribute['Color']) {
+    //     availableColors.push(attribute['Color'])
+    //   }
+    // })
+
+    // use same attributes for all
+    let availableColors = ['White', 'Black', 'Red', 'Orange', 'Yellow', 'Blue', 'Green', 'Indigo', 'Purple'];
+    let availableSizes = ['S', 'M', 'L', 'XXL', 'XL']
+
 
     // Generate color blocks
     const colorOptions = availableColors.map((color) => {
       return (
-     <div className="colorCheckBox" id={`color${color}`} key={color} value={color} onClick={()=> setChosenColor(color)}>
-      </div>
+        <div className="colorCheckBox" id={`color${color}`} key={color} value={color} onClick={() => setChosenColor(color)}>
+        </div>
       )
     })
 
@@ -102,8 +109,29 @@ const shirtDetail = (props) => {
             </div>
           </div>
           <div className="shirtActionButtons">
-            <button id="buyNowButton" className="payButton" type="button"> Buy Now </button>
-            <button id="addToCartButton" className="payButton" type="button"> Add to Cart </button>
+            <Link to={{
+              pathname: '/checkout',
+              state: {
+                preparedItems: [{
+                  name,
+                  attributes: chosenColor + ', ' + chosenSize,
+                  quantity: chosenQuantity,
+                  price
+                }]
+              }
+            }}>
+            <button className="payButton" >
+                Buy Now 
+            </button>
+            </Link>
+
+            <button
+              id="addToCartButton"
+              className="payButton"
+              onClick={addItemToCart}
+              type="button">
+              Add to Cart
+                </button>
           </div>
         </div>
       </div>
@@ -121,7 +149,8 @@ shirtDetail.propTypes = {
   chosenSize: PropTypes.string.isRequired,
   setChosenColor: PropTypes.func.isRequired,
   setChosenQuantity: PropTypes.func.isRequired,
-  setChosenSize: PropTypes.func.isRequired
+  setChosenSize: PropTypes.func.isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
 
 export default shirtDetail;
