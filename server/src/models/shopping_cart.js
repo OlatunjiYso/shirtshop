@@ -10,7 +10,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    CustomerId: {
+    customerId: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
