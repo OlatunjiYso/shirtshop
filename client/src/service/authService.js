@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rootUrl = 'api/v1/customers';
+const rootUrl = '/api/v1/customers';
 
 class AuthService {
 

@@ -26,10 +26,10 @@ const compiler = webpack(webpackConfig);
 dotenv.config();
 
 // Import Single page html
-const indexFile = path.join(__dirname, '../../client/dist/index.html');
+const indexFile = path.join(__dirname, '../../client/index.html');
 
 const app = express();
-app.use(cors())
+//app.use(cors())
 //use webpack middleware to intercept client routes
 app.use(webpackMiddleware(compiler));
 app.use(webpackHotMiddleware(compiler));

@@ -94,7 +94,7 @@ class ProductDetails extends Component {
     const shirtDetails = this.props.productData.currentShirt;
     const { chosenColor, chosenQuantity, chosenSize } = this.state;
     return (
-      <div>
+      <main>
         <DetailsCard
           shirtDetails={shirtDetails}
           chosenColor={chosenColor}
@@ -105,7 +105,7 @@ class ProductDetails extends Component {
           setChosenQuantity={this.setChosenQuantity}
           addItemToCart={this.addItemToCart}
         />
-      </div>
+      </main>
     );
   }
 }

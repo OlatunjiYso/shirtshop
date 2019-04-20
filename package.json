@@ -12,7 +12,8 @@
     "run-migrations": "sequelize db:migrate",
     "drop-migrations": "sequelize db:migrate:undo:all ",
     "run-seeders": "sequelize db:seed:all",
-    "drop-seeders": "sequelize db:seed:undo:all"
+    "drop-seeders": "sequelize db:seed:undo:all",
+    "heroku-postbuild": "npm run webpack-build"
   },
   "keywords": [
     "Node",
