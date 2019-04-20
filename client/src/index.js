@@ -10,11 +10,9 @@ import setToken from './helpers/authorization'
 import setCurrentCustomer from './actions/customers'
 
 if (localStorage.token) {
-  console.log('I am always called', localStorage.token)
   setToken(localStorage.token);
   store.dispatch(setCurrentCustomer({loggedIn: true}));
 } else {
-  console.log('no token', localStorage.token)
   store.dispatch(setCurrentCustomer({loggedIn: false}));
 }
 
