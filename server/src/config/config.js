@@ -18,5 +18,11 @@ module.exports = {
     host: '127.0.0.1',
     dialect: 'mysql',
     logging: false
+  },
+
+  production: {
+    use_env_variable: 'PROD_DATABASE_URL',
+    dialect: 'mysql',
+    logging: false
   }
 }
