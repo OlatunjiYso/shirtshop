@@ -6,7 +6,8 @@ const catSideNav = (props) => {
     categories,
     changeDepartment,
     currentDepartment,
-    changeCategory } = props
+    changeCategory,
+    fetchAllProducts } = props
 
   const departmentOptions = departments.map((department) => {
     return (
@@ -30,7 +31,7 @@ const catSideNav = (props) => {
         <h1> 🌆</h1>
       </div>
       <select id="departmentSelect" value={currentDepartment} onChange={changeDepartment}>
-        <option value="department">Department</option>
+        <option value="department" >Department</option>
         {departmentOptions}
       </select>
       <ul className="categoryItems" onClick={changeCategory}>
@@ -46,6 +47,7 @@ catSideNav.propTypes = {
   changeDepartment: propTypes.func.isRequired,
   currentDepartment: propTypes.string.isRequired,
   changeCategory: propTypes.func.isRequired,
+  fetchAllProducts: propTypes.func.isRequired
 };
 
 export default catSideNav;

@@ -56,6 +56,27 @@ class Validations {
   }
 
 
+  /**
+   * @description - validates cart new entry
+   * @param {object} req 
+   * @param {object} res 
+   * @param {object} next 
+   */
+  static validateAddingcartItem(req, res, next) {
+    req.checkBody('productId', 'Product id is required').trim().notEmpty();
+    req.checkBody('attributes', 'Enter attributes').trim().notEmpty();
+    req.checkBody('quantity', 'Enter quantity').trim().notEmpty();
+    req.checkBody('buyNow', 'Enter buynow').trim().notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const errorList = errors.map(error => error.msg);
+      return res.status(400)
+        .send({ errors: errorList });
+    }
+    return next();
+  }
+
+
 
   /**
      * Checks if creditcard of customer already exists.

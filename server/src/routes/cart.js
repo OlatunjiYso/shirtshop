@@ -1,6 +1,7 @@
 import express from 'express';
 
 import authenticate from '../middleware/authentication';
+import validator from '../middleware/validations';
 import cartController from '../controllers/cart'
 const cartHandler = express.Router();
 
@@ -8,6 +9,7 @@ const cartHandler = express.Router();
 cartHandler.post(
   '/',
   authenticate,
+  validator.validateAddingcartItem,
   cartController.createCartItem
 );
 
@@ -18,5 +20,11 @@ cartHandler.get(
   cartController.getMyCartItems
 );
 
+// removing cart item
+cartHandler.delete(
+  '/:cartItemId',
+  authenticate,
+  cartController.removeItem
+)
 
 export default cartHandler;

@@ -4,6 +4,7 @@ import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
 import path from 'path';
 import webpack from 'webpack';
+import cors from 'cors';
 //Allow client side rendering
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -15,6 +16,7 @@ import categoryHandler from './routes/category';
 import  departmentHandler from './routes/department';
 import cartHandler from './routes/cart';
 import orderHandler from './routes/order';
+import searchHandler from './routes/search';
 import notFoundHandler from './routes/notFound';
 import webpackConfig from '../../client/webpack.config';
 
@@ -27,6 +29,7 @@ dotenv.config();
 const indexFile = path.join(__dirname, '../../client/dist/index.html');
 
 const app = express();
+app.use(cors())
 //use webpack middleware to intercept client routes
 app.use(webpackMiddleware(compiler));
 app.use(webpackHotMiddleware(compiler));
@@ -48,11 +51,13 @@ app.use((req, res, next) => {
 
 // Route incoming request to appropriate handlers
 app.use('/api/v1/customers/', customerHandler);
+app.use('/api/v1/products/search', productHandler);
 app.use('/api/v1/products/', productHandler);
 app.use('/api/v1/categories/products', categoryHandler);
 app.use('/api/v1/categories/', categoryHandler);
 app.use('/api/v1/departments/', departmentHandler);
 app.use('/api/v1/carts', cartHandler);
+app.use('/api/v1/search/', searchHandler);
 app.use('/api/v1/orders', orderHandler);
 app.use('/api/*', notFoundHandler);
 

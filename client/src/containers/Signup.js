@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import alertify from 'alertifyjs';
 
+import setCurrentUser from '../actions/customers';
 import SignupForm from '../components/signup';
-
 import authService from '../service/authService';
 
 /**
@@ -46,10 +50,19 @@ class Signup extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const user = this.state;
-    authService.signup(user);
-    this.setState({
-      ...this.state, email: '', password: '', name: '', confirmPassword: ''
+    authService.signup(user)
+    .then((res) => {
+      localStorage.setItem('token', res.data.token);
+      alertify.set('notifier', 'position', 'top-center');
+      alertify.success(res.data.message);
+      this.props.history.push('/')
+      this.props.setCurrentUser({loggedIn: true});
+      this.setState({ ...this.state, email: '', password: ''})
     })
+    .catch((err) => {
+     alertify.set('notifier', 'position', 'top-center');
+     alertify.error(err.response.data.message || err.response.data.errors[0]);
+   })
   }
 
   /**
@@ -74,4 +87,25 @@ class Signup extends Component {
 }
 
 
-export default Signup;
+const mapStateToProps = state => {
+  const customerData = state.customers;
+  return {
+    customerData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    { setCurrentUser },
+    dispatch
+  );
+};
+
+
+Signup.propTypes = {
+  history: PropTypes.any,
+  customerData: PropTypes.object.isRequired,
+  setCurrentUser: PropTypes.func
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

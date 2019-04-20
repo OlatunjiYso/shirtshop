@@ -42,7 +42,7 @@ class CartController {
         res.status(501)
         .json({
           message: 'internal server error',
-          error: err.msg
+          error: err
         })
       })
   }
@@ -85,6 +85,31 @@ class CartController {
           error: err
         })
       });
+  }
+
+  /**
+   * 
+   */
+  static removeItem(req, res) {
+    ShoppingCart
+    .destroy({
+      where: {
+        id: req.params.cartItemId
+      }
+    })
+    .then(()=> {
+      res.status(200)
+      .json({
+        message: 'item removed'
+      })
+    })
+    .catch((err)=> {
+      res.status(500)
+      .json({
+        message: 'Internal server error',
+        error: err
+      })
+    })
   }
 }
 

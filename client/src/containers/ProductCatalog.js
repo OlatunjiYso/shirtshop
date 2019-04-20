@@ -68,6 +68,7 @@ class ProductCatalog extends Component {
 
   render() {
    let  { categories, departments, shirts, currentDepartment, currentCategory, pages } = this.props.productData;
+   const fetchAllProducts = this.props.fetchAllShirts
     return (
       <div>
         <Catalog 
@@ -78,6 +79,7 @@ class ProductCatalog extends Component {
         changeDepartment={this.changeDepartment}
         changeCategory={this.changeCategory}
         currentCategory={currentCategory}
+        fetchAllProducts ={fetchAllProducts}
         />
         <Pagination
          pages= {pages}
@@ -91,7 +93,7 @@ class ProductCatalog extends Component {
 }
 
 const mapStateToProps = state => {
-  const productData = state;
+  const productData = state.products;
   return {
     productData
   };

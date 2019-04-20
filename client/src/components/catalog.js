@@ -12,7 +12,8 @@ const catalog = (props) => {
     currentDepartment,
     changeDepartment,
     currentCategory,
-    changeCategory } = props;
+    changeCategory,
+    fetchAllProducts } = props;
 
   let shirtCards = shirts.map((shirt) => {
     let { id, name, image, price } = shirt
@@ -35,6 +36,7 @@ const catalog = (props) => {
           changeDepartment={changeDepartment}
           currentDepartment={currentDepartment}
           changeCategory={changeCategory}
+          fetchAllProducts= {fetchAllProducts}
         />
       </div>
       <div className="catalogCardsSection">
@@ -56,6 +58,7 @@ catalog.propTypes = {
   currentDepartment: propTypes.string.isRequired,
   currentCategory: propTypes.string.isRequired,
   changeCategory: propTypes.func.isRequired,
+  fetchAllProducts: propTypes.func.isRequired
 };
 
 export default catalog;
