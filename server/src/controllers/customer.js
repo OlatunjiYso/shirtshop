@@ -104,7 +104,6 @@ class CustomerController {
                 token
               });
           })
-
       })
       .catch((err) => {
         res.status(503)

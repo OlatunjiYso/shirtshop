@@ -51,6 +51,36 @@ const shirtDetail = (props) => {
         </h6>
       )
     })
+    // choose to show payments buttons or not.
+    const paymentButtons = (localStorage.token) ?
+
+    ( <div className="shirtActionButtons">
+    <Link to={{
+      pathname: '/checkout',
+      state: {
+        preparedItems: [{
+          name,
+          attributes: chosenColor + ', ' + chosenSize,
+          quantity: chosenQuantity,
+          price
+        }]
+      }
+    }}>
+    <button className="payButton" >
+        Buy Now 
+    </button>
+    </Link>
+
+    <button
+      id="addToCartButton"
+      className="payButton"
+      onClick={addItemToCart}
+      type="button">
+      Add to Cart
+        </button>
+  </div>) : <h2> Please login to purchase or add to cart </h2>
+
+
     return (
       <div className="shirtDetailBody">
         {/* Left side */}
@@ -108,31 +138,7 @@ const shirtDetail = (props) => {
               <h6 id="selectedColorText"> {chosenQuantity} No(s)</h6>
             </div>
           </div>
-          <div className="shirtActionButtons">
-            <Link to={{
-              pathname: '/checkout',
-              state: {
-                preparedItems: [{
-                  name,
-                  attributes: chosenColor + ', ' + chosenSize,
-                  quantity: chosenQuantity,
-                  price
-                }]
-              }
-            }}>
-            <button className="payButton" >
-                Buy Now 
-            </button>
-            </Link>
-
-            <button
-              id="addToCartButton"
-              className="payButton"
-              onClick={addItemToCart}
-              type="button">
-              Add to Cart
-                </button>
-          </div>
+         { paymentButtons}
         </div>
       </div>
     )

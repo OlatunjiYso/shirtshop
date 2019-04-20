@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import alertify from 'alertifyjs';
+import setToken from '../helpers/authorization'
 
 import setCurrentUser from '../actions/customers';
 import SignupForm from '../components/signup';
@@ -53,6 +54,7 @@ class Signup extends Component {
     authService.signup(user)
     .then((res) => {
       localStorage.setItem('token', res.data.token);
+      setToken(res.data.token);
       alertify.set('notifier', 'position', 'top-center');
       alertify.success(res.data.message);
       this.props.history.push('/')
