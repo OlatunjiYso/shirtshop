@@ -26,7 +26,7 @@ class CartController {
     ShoppingCart
       .create({
           productId,
-          CustomerId: id,
+          customerId: id,
           attributes,
           quantity,
           buyNow
@@ -57,7 +57,7 @@ class CartController {
     ShoppingCart
       .findAndCountAll({
         where: {
-          CustomerId: req.user.id
+          customerId: req.user.id
         },
         include: [
           { model: Product }
