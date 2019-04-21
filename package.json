@@ -7,7 +7,7 @@
     "test": "PORT=1234 NODE_ENV=test mocha server/test/ --require babel-register",
     "build": "babel ./server/src -d ./server/dist",
     "start": "npm run build && node server/dist/index.js",
-    "heroku-postbuild": "npm run webpack-build"
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [
     "Node",
