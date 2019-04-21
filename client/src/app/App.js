@@ -5,14 +5,14 @@ import styles from './styles.css';
 /* eslint-enable no-unused-vars */
 
 import NavBar from './containers/NavBar';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import ProductCatalog from './containers/ProductCatalog';
 import ProductDetails from './containers/ProductDetails';
-import Checkout from './components/checkout'
+import Checkout from './components/Checkout'
 import Cart from './containers/Cart';
-import NotFound from './components/notFound';
+import NotFound from './components/NotFound';
 
 class App extends Component {
 

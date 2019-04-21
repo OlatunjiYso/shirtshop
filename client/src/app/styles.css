@@ -73,6 +73,7 @@ color: rgb(58, 58, 58)
   box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
   background-image: url(./images/fashion.jpg);
   background-size: cover;
+  min-height: 90vh;
 }
 
 
@@ -586,7 +587,7 @@ transition: 0.3s;
   background: rgb(37, 1, 21);
   display: flex;
   flex-direction: row;
-  padding: 10px 100px;
+  padding: 20px 100px;
 }
 
 .leftFooter {

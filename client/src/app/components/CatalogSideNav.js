@@ -6,8 +6,8 @@ const catSideNav = (props) => {
     categories,
     changeDepartment,
     currentDepartment,
-    changeCategory,
-    fetchAllProducts } = props
+    changeCategory
+   } = props
 
   const departmentOptions = departments.map((department) => {
     return (

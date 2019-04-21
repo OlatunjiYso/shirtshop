@@ -6,7 +6,7 @@ const signup = (props) => {
   const { handleChange, handleSubmit, user, passwordCheck } = props;
   const { email, password, confirmPassword, name} = user;
   const passwordMismatch = passwordCheck ? 
-  <span className="white-text"> No match ❌</span> :
+  <span className="white-text" role="img"> No match ❌</span> :
   null;
   return (
     <main id="auth">

@@ -6,7 +6,7 @@ import alertify from 'alertifyjs';
 import setToken from '../helpers/authorization'
 
 import setCurrentUser from '../actions/customers';
-import SignupForm from '../components/signup';
+import SignupForm from '../components/Signup';
 import authService from '../service/authService';
 
 /**

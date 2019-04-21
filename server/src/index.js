@@ -3,11 +3,7 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import dotenv from 'dotenv';
 import path from 'path';
-import webpack from 'webpack';
 import cors from 'cors';
-//Allow client side rendering
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
 
 import customerHandler from './routes/customer';
@@ -18,25 +14,20 @@ import cartHandler from './routes/cart';
 import orderHandler from './routes/order';
 import searchHandler from './routes/search';
 import notFoundHandler from './routes/notFound';
-import webpackConfig from '../../client/webpack.config';
-
-const compiler = webpack(webpackConfig);
 
 // Load environmental variables
 dotenv.config();
 
-// Import Single page html
-const indexFile = path.join(__dirname, '../../client/index.html');
-
 const app = express();
-//app.use(cors())
-//use webpack middleware to intercept client routes
-app.use(webpackMiddleware(compiler));
-app.use(webpackHotMiddleware(compiler));
+app.use(cors())
 
 // Parse incoming requests data.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, '../../client/build')));
+
 
 // Use expressValidator for input validation
 app.use(expressValidator());
@@ -62,15 +53,16 @@ app.use('/api/v1/orders', orderHandler);
 app.use('/api/*', notFoundHandler);
 
 app.get('/*', (req, res) => {
-  res.sendFile(indexFile, (err) => {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'), (err) => {
     if (err) {
+
       res.status(500).send(err);
     }
   });
 });
 
 // Set listening port
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('I am running live');
 })
 
