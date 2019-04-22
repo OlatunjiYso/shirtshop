@@ -61,7 +61,7 @@ class Checkout extends Component {
       let attributesArray = attributes.split(',');
       const color = attributesArray[0];
       const size = attributesArray[1];
-      const cost = (price * quantity).toFixed(2);
+      const cost = Math.round(price * quantity);
       total += cost;
       return (
         <div className="orderRow" key={name}>
