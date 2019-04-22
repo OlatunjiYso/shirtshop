@@ -64,7 +64,7 @@ class CategoryController {
               })
           })
           .catch((err) => {
-            res.status(500)
+            return res.status(500)
               .json({
                 error: err.message
               })
@@ -82,7 +82,7 @@ class CategoryController {
    * @return { json }  message
    */
   static getCategories(req, res) {
-    Category
+    return Category
       .findAll({
         where: {
           departmentId: req.params.departmentId
@@ -102,7 +102,7 @@ class CategoryController {
           })
       })
       .catch((err) => {
-        res.status(500)
+        return res.status(500)
           .json({
             error: err
           })

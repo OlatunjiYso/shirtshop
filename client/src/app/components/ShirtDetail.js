@@ -78,7 +78,7 @@ const shirtDetail = (props) => {
       type="button">
       Add to Cart
         </button>
-  </div>) : <h4> Please login to purchase or add to cart </h4>
+  </div>) : <h6> Please login to purchase or add to cart </h6>
 
 
     return (
