@@ -19,6 +19,7 @@ class ProductCatalog extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPage: 1
     }
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
@@ -28,7 +29,7 @@ class ProductCatalog extends Component {
    * @description - runs after page loads
    */
   componentDidMount() {
-    const pageNumber = 1;
+    const pageNumber = this.state.currentPage
     this.props.fetchAllShirts(pageNumber);
     this.props.fetchDepartments();
     this.props.fetchCategories(1);
@@ -64,6 +65,10 @@ class ProductCatalog extends Component {
    */
   getPaginatedView(pageNumber) {
     this.props.fetchAllShirts(pageNumber);
+    this.setState({
+      ...this.state, currentPage: pageNumber
+    })
+
   } 
 
   render() {
@@ -85,6 +90,7 @@ class ProductCatalog extends Component {
          pages= {pages}
          getPaginatedView={this.getPaginatedView}
          currentCategory={currentCategory}
+         currentPage= {this.state.currentPage}
 
          />
       </div>
