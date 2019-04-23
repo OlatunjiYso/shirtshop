@@ -21,8 +21,8 @@ module.exports = {
   },
 
   production: {
-    use_env_variable: 'PROD_DATABASE_URL',
-    dialect: 'postgres',
+    use_env_variable: 'CLEARDB_DATABASE_URL',
+    dialect: 'mysql',
     logging: false
   }
 
