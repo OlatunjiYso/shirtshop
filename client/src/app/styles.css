@@ -172,11 +172,6 @@ main {
   margin: 20px auto;
   text-decoration: none;
 }
-#payStackBtn {
-  display: block;
-  width: 20%;
-  margin: 20px auto;
-}
 
 /* catalog side nav styles */
 /* catalog side nav styles */
@@ -312,6 +307,20 @@ margin-left: 20px;
 }
 #pyst {
   height: 500px;
+}
+#payStackBtn {
+  display: block;
+  width: 35%;
+  margin: 20px auto;
+}
+#testPaymentCard {
+  width: 25%;
+  margin: 10px auto;
+  background: rgb(241, 240, 240);
+  padding: 5px 40px;
+  border-radius: 10px;
+  color: grey;
+  font-size: 20px;
 }
 
 /* pagination Styles 😎 */

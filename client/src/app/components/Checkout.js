@@ -25,7 +25,7 @@ class Checkout extends Component {
    * payment response
    */
   callback (response){
-    console.log(response); // card charged successfully, get reference here
+    console.log(response); 
   }
 
   /**
@@ -110,6 +110,11 @@ class Checkout extends Component {
                 tag="button"
               />
               </span>
+              <div id="testPaymentCard">
+                <h6> Card Number: 408 408 408 408 408 1 </h6>
+                <h6> Expiry Date: 12 / 28 </h6>
+                <h6> CVV: 408 </h6>
+              </div>
       </div>
     );
   }
