@@ -100,9 +100,9 @@ const shirtDetail = (props) => {
           </h6>
           <h6 className="shirtPrice">
             Discount Price:
-          <span id="shirtDiscountValue"> ${discountedPrice} </span>
+          <span id="shirtDiscountValue"> ${(price - discountedPrice).toFixed(2)} </span>
             <span className="greyText"> / piece </span>
-            <span id="discountPercentage"> - {((price - discountedPrice) / price).toFixed(1) * 100}%</span>
+            <span id="discountPercentage"> - {((price - (price - discountedPrice)) / price).toFixed(2) * 100}%</span>
           </h6>
           <div className="coreAttributes">
 
