@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import setCurrentUser from '../actions/customers';
-import AppNav from '../components/navbar';
+import AppNav from '../components/Navbar';
 
 /**
  * @class NavBar

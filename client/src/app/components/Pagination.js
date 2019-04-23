@@ -17,7 +17,7 @@ const pagination = (props) => {
       </h3>)
   })
 
-  const paginationBlock = (currentCategory == 'All') ? paginationItems : null
+  const paginationBlock = (currentCategory === 'All') ? paginationItems : null
   return (
     <div className="paginationBody">
       <div className="paginationItems">

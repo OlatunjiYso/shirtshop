@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { fetchShirt } from '../actions/product';
-import DetailsCard from '../components/shirtDetail';
+import DetailsCard from '../components/ShirtDetail';
 import cartService from '../service/cart';
 
 /**

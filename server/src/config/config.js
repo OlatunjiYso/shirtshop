@@ -3,26 +3,24 @@ dotenv.config();
 
 module.exports = {
   development: {
-    username: process.env.LOCAL_DB_USERNAME,
-    password: process.env.LOCAL_DB_PASSWORD,
-    database: process.env.LOCAL_DB,
+    username:  'root' ||  process.env.LOCAL_DB_USERNAME,
+    password: 'password'||  process.env.LOCAL_DB_PASSWORD,
+    database: 'shirtshoptest' || process.env.LOCAL_DB,
     host: '127.0.0.1',
     dialect: 'mysql',
-    logging: false
   },
 
   test: {
-    username: process.env.LOCAL_TEST_DB_USERNAME,
-    password: process.env.LOCAL_TEST_DB_PASSWORD,
-    database: process.env.LOCAL_TEST_DB,
+    username: 'root' || process.env.LOCAL_TEST_DB_USERNAME,
+    password: 'password'|| process.env.LOCAL_TEST_DB_PASSWORD,
+    database: 'shirtshoptest' || process.env.LOCAL_TEST_DB,
     host: '127.0.0.1',
-    dialect: 'mysql',
-    logging: false
+    dialect: 'mysql'
   },
 
   production: {
-    use_env_variable: 'PROD_DATABASE_URL',
-    dialect: 'postgres',
+    use_env_variable: 'CLEARDB_DATABASE_URL',
+    dialect: 'mysql',
     logging: false
   }
 

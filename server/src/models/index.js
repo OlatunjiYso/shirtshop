@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import dbConfig from '../config/config';
 
 dotenv.config();
-
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
 const config = dbConfig[env];
@@ -34,5 +33,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// db.sequelize.sync()
 
 module.exports = db;

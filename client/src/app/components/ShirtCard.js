@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { prototype } from 'events';
 
 const shirtCard = (props) => {
   const { name, id, price, imageUrl} = props;
@@ -11,7 +10,7 @@ const shirtCard = (props) => {
   return (
     <Link to={`/product/${id}`}>
     <div className="shirtCardBody" key={id} >
-        <img  src={require(`../images/products/${imageUrl}`)} />
+        <img  src={require(`../images/products/${imageUrl}`)} alt="shirtImage"/>
       <h6 className="shirtCardName"> {refinedName}</h6>
       <h5 className="shirtCardPrice"> ${ price }</h5>
     </div>

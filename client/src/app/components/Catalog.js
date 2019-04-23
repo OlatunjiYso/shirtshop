@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import SideNav from '../components/catalogSideNav';
-import ShirtCard from '../components/shirtCard';
+import SideNav from './CatalogSideNav';
+import ShirtCard from './ShirtCard';
 
 
 const catalog = (props) => {

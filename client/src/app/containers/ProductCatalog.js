@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 import { fetchAllShirts, fetchCategories, } from '../actions/product';
 import { fetchProductsInCategory, fetchDepartments } from '../actions/product';
-import Catalog from '../components/catalog';
-import Pagination from '../components/pagination';
+import Catalog from '../components/Catalog';
+import Pagination from '../components/Pagination';
 
 
 /**

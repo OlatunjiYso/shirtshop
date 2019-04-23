@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import PaystackButton from 'react-paystack';
+import mailingService from '../service/mailService';
 
 /**
  * @class Checkout
@@ -25,7 +26,13 @@ class Checkout extends Component {
    * payment response
    */
   callback (response){
-    console.log(response); // card charged successfully, get reference here
+    const text = `Your order was successful!. Your order reference is ${response.reference}`
+    const maildetails = {
+      from: 'fineshirtshopz@gmail.com',
+      subject: "Thanks for your order",
+      text
+    }
+    mailingService.sendMail(maildetails)
   }
 
   /**
@@ -61,7 +68,7 @@ class Checkout extends Component {
       let attributesArray = attributes.split(',');
       const color = attributesArray[0];
       const size = attributesArray[1];
-      const cost = price * quantity;
+      const cost = Math.round(price * quantity);
       total += cost;
       return (
         <div className="orderRow" key={name}>
@@ -110,6 +117,11 @@ class Checkout extends Component {
                 tag="button"
               />
               </span>
+              <div id="testPaymentCard">
+                <h6> Card Number: 408 408 408 408 408 1 </h6>
+                <h6> Expiry Date: 12 / 28 </h6>
+                <h6> CVV: 408 </h6>
+              </div>
       </div>
     );
   }

@@ -6,14 +6,8 @@
   "scripts": {
     "test": "PORT=1234 NODE_ENV=test mocha server/test/ --require babel-register",
     "build": "babel ./server/src -d ./server/dist",
-    "start": "npm run build && npm run webpack-build && node server/dist/index.js",
-    "webpack-serve": "webpack-dev-server --config ./client/webpack.config.js --mode development",
-    "webpack-build": "webpack --config ./client/webpack.config.js",
-    "run-migrations": "sequelize db:migrate",
-    "drop-migrations": "sequelize db:migrate:undo:all ",
-    "run-seeders": "sequelize db:seed:all",
-    "drop-seeders": "sequelize db:seed:undo:all",
-    "heroku-postbuild": "npm run webpack-build"
+    "start": "npm run build && node server/dist/index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [
     "Node",
@@ -24,31 +18,23 @@
   "author": "Olatunji",
   "license": "ISC",
   "dependencies": {
-    "alertifyjs": "^1.11.2",
-    "axios": "^0.18.0",
+    "babel-eslint": "^9.0.0",
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
+    "eslint": "^5.12.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "file-loader": "^1.1.11",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.6.5",
+    "nodemailer": "^6.1.1",
     "pg": "^7.10.0",
     "pg-hstore": "^2.3.2",
     "q": "^1.5.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-paystack": "^2.0.2",
-    "react-redux": "^7.0.2",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "redux-thunk": "^2.3.0",
     "sequelize": "^5.1.0",
-    "sequelize-cli": "^5.4.0",
-    "webpack-dev-middleware": "^3.6.2",
-    "webpack-hot-middleware": "^2.24.3"
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -56,23 +42,14 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "css-loader": "^2.1.1",
-    "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
     "mocha": "^6.0.2",
-    "prop-types": "^15.7.2",
-    "react-hot-loader": "^4.8.3",
-    "redux": "^4.0.1",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "redux": "^4.0.1"
   }
 }

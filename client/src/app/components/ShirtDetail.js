@@ -15,10 +15,10 @@ const shirtDetail = (props) => {
   } = props;
   if (shirtDetails) {
     // Fetch shirt parameters
-    const { name, id, image, price, discountedPrice, description } = shirtDetails.foundProduct;
-    const { attributes } = shirtDetails;
+    const { name, image, price, discountedPrice, description } = shirtDetails.foundProduct;
+    
 
-
+    // const { attributes } = shirtDetails;
     // let availableSizes = [];
     // let availableColors = []
     // attributes.map((attribute) => {
@@ -78,7 +78,7 @@ const shirtDetail = (props) => {
       type="button">
       Add to Cart
         </button>
-  </div>) : <h2> Please login to purchase or add to cart </h2>
+  </div>) : <h5> Please login to purchase or add to cart </h5>
 
 
     return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-// import { prototype } from 'events';
 
 const cartItem = (props) => {
   const { name, id, price, image, removeItem, quantity, attributes } = props;
@@ -11,7 +10,7 @@ const cartItem = (props) => {
     name : name.slice(0, 16) + ' ...'
   return (
     <div className="cartItemBody" key={id} >
-      <img src={require(`../images/products/${image}`)} />
+      <img src={require(`../images/products/${image}`)} alt="shirtImage"/>
       <h6 className="cartItemName"> {refinedName}</h6>
       <h5 className="cartItemPrice"> ${price}</h5>
       <div id="cartItemAttributes">
