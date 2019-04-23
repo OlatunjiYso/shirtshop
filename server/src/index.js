@@ -13,6 +13,7 @@ import  departmentHandler from './routes/department';
 import cartHandler from './routes/cart';
 import orderHandler from './routes/order';
 import searchHandler from './routes/search';
+import mailHandler from './routes/mail';
 import notFoundHandler from './routes/notFound';
 
 // Load environmental variables
@@ -50,6 +51,7 @@ app.use('/api/v1/departments/', departmentHandler);
 app.use('/api/v1/carts', cartHandler);
 app.use('/api/v1/search/', searchHandler);
 app.use('/api/v1/orders', orderHandler);
+app.use('/api/v1/mails', mailHandler);
 app.use('/api/*', notFoundHandler);
 
 app.get('/*', (req, res) => {

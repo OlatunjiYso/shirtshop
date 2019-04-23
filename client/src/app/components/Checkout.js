@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import PaystackButton from 'react-paystack';
+import mailingService from '../service/mailService';
 
 /**
  * @class Checkout
@@ -25,7 +26,13 @@ class Checkout extends Component {
    * payment response
    */
   callback (response){
-    console.log(response); 
+    const text = `Your order was successful!. Your order reference is ${response.reference}`
+    const maildetails = {
+      from: 'fineshirtshopz@gmail.com',
+      subject: "Thanks for your order",
+      text
+    }
+    mailingService.sendMail(maildetails)
   }
 
   /**
