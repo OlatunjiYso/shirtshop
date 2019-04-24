@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -20,13 +21,14 @@ class NavBar extends Component {
   }
 
   /**
-   * @description logsout a user
+   * @description logs out a user
    * 
    * @memberof NavBar
    */
   logout() {
     localStorage.removeItem('token');
     this.props.setCurrentUser({loggedIn: false});
+    this.props.history.push('/');
   }
 
   /**
@@ -68,4 +70,4 @@ NavBar.propTypes = {
   setCurrentUser: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

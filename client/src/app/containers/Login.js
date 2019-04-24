@@ -49,9 +49,11 @@ class Login extends Component {
       setToken(res.data.token);
       alertify.set('notifier', 'position', 'top-center');
       alertify.success(res.data.message);
-      this.props.history.push('/');
       this.props.setCurrentUser({loggedIn: true});
       this.setState({ ...this.state, email: '', password: ''})
+      this.props.history.push('/');
+      
+      
     })
     .catch((err) => {
       alertify.set('notifier', 'position', 'top-center');

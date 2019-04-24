@@ -33,7 +33,7 @@
   border-radius: 10px 10px 0 0;
   font-size: 25px;
   text-align: center ;
-  background: rgb(94, 1, 40);
+  background: rgb(94, 1, 40); 
   color: rgb(216, 216, 216);
   padding: 20px;
 }
@@ -351,7 +351,7 @@ margin-left: 20px;
   margin: 20px auto 60px auto;
   display:flex;
   flex-direction:row;
-  justify-content: center
+  justify-content: center;
 }
 .currentPage {
   background: rgb(70, 22, 50);
@@ -365,7 +365,7 @@ margin-left: 20px;
   margin:30px 10px;
   width: 250px;
   height: 300px;
-  border: 2px solid rgb(133, 5, 58);
+  border: 1px solid rgb(94, 5, 42);
   border-radius: 5px 20px;
   cursor: pointer;
   transition: transform 0.4s;
@@ -412,12 +412,12 @@ justify-content: space-evenly;
 .attributeSection {
   border-left: 1px solid rgb(185, 185, 185);
   padding: 20px;
-  /* height: 600px; */
   width: 55%
 }
 .itemDescription {
   border-bottom: 1px solid rgb(185, 185, 185);
   font-size: 22px;
+  padding: 20px;
 }
 .imageTitle {
   align-content: center;
@@ -559,11 +559,11 @@ justify-content: space-evenly;
 
 /* navbar styles*/
 .navBody {
-  background: rgb(94, 1, 40);
+  background: rgb(87, 4, 38);
   display: flex;
   flex-direction: row;
   padding: 10px 100px;
-  color: rgb(209, 209, 209);
+  color: rgb(241, 235, 238);
 }
 .leftNavbar {
   flex-grow: 1;
@@ -588,9 +588,9 @@ transition: 0.3s;
 
 }
 .navLogo {
-  color: rgb(214, 214, 214);
+  color: rgb(241, 235, 238);
   cursor: pointer;
-  border: 1px solid rgb(214, 214, 214);
+  border: 1px solid rgb(241, 235, 238);
   padding:5px 10px;
   border-radius: 0 10px;
 }
