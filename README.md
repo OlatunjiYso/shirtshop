@@ -14,32 +14,41 @@ Visit this [link](https://shirtshopz.herokuapp.com)
 
 ### Getting Started
 ##### Fork/Clone the Repo
-change directory to the git repository by doing cd shirtshop
+`change directory to the git repository by doing cd shirtshop`
 
 ##### Install dependencies
-npm install
+`npm install`
 
 ##### Setup Database Client
-Download Mysql database client
-Create a database
+`Download Mysql database client`
+`Create a database`
 
 ##### Setting up environmental variables
 Create a .env file in the root directory of the repo
+
 Add the following environmental variables:
+
 DB_USERNAME =  Your local database username
+
 DB_PASSWORD = Your database password
+
 DB_DATABASE_TEST = Name of the database you want to use for the tests
+
 DB_DATABASE_DEV = Name of the database you want to use for development
+
 JWT_KEY = Your JSON web token secret key 
 
 ##### Populate local database with necessary tables and columns
 In your command line type :
-1. npm install -g sequelize-cli
-2. sequelize db:migrate
-3. sequelize db:seed:all 
+
+`npm install -g sequelize-cli`
+
+`sequelize db:migrate`
+
+`sequelize db:seed:all`
 
 ##### Run the application
-npm start
+`npm start`
 
 #### Technology Stack
 - Node
