@@ -12,7 +12,6 @@ class MailService {
     const url = `${rootUrl}/`;
     axios.post(url, details)
     .then((res) => {
-      console.log(res.data);
       alertify.set('notifier', 'position', 'top-center');
       alertify.success(res.data.message);
       

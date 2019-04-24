@@ -20,9 +20,7 @@ class CategoryController {
   static getCategoryProducts(req, res) {
     const filter = {};
     let foundProducts = [];
-    if (req.query.category_id) {
       filter.categoryId = req.query.category_id;
-    }
     ProductCategory
       .findAll({
         where: filter

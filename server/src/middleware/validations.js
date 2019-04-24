@@ -204,10 +204,21 @@ class Validations {
    */
   static validateFetchCategories(req, res, next) {
     let departmentId = parseInt(req.params.departmentId);
-    if  (typeof departmentId != 'number') {
+    if  (!departmentId || departmentId == undefined) {
       return res.status(400)
       .json({
         message: 'please enter a valid departmentId'
+      })
+    }
+    return next();
+  }
+
+  static validateFetchCategoryProduct(req, res, next) {
+    let categoryId = req.query.category_id;
+    if  (!categoryId || categoryId == undefined) {
+      return res.status(400)
+      .json({
+        message: 'please enter a valid categoryId'
       })
     }
     return next();
