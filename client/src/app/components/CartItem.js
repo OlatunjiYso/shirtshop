@@ -23,7 +23,7 @@ const cartItem = (props) => {
       <button
        id="cartItemRemoveButton"
        onClick={() => removeItem(id)}>
-        Remove Item
+        Remove
          </button>
     </div>
   )
