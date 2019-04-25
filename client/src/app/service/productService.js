@@ -12,6 +12,14 @@ class ProductService {
     return axios.get(url);
   }
 
+   /**
+ * @description search for product
+ */
+static searchProduct(keyword) {
+  const url = `${rootUrl}/search/products?searchItem=${keyword}`;
+  return axios.get(url);
+}
+
  /**
  * @description fetches a particular shirt from db.
  * @param {Integer} productId - product id

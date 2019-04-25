@@ -6,8 +6,10 @@ const catSideNav = (props) => {
     categories,
     changeDepartment,
     currentDepartment,
-    changeCategory
-   } = props
+    changeCategory,
+    searchShirts,
+    fetchAllProducts
+  } = props
 
   const departmentOptions = departments.map((department) => {
     return (
@@ -17,26 +19,30 @@ const catSideNav = (props) => {
       </option>
     )
   });
-
   const categoryListItems = categories.map((category) => {
     return (
-      <li className="categoryItem" key={category.id} value={category.id}  >
+      <li className="categoryItem" key={category.id} value={category.id} onClick={changeCategory}>
         {category.name}
       </li>
     )
   })
+  let departmentImage = (currentDepartment === '1') ? ' 🏁' : (currentDepartment === '2') ? '🌴' : '🌤'
   return (
     <div className="catSideNavBody">
       <div className="departmentpics">
-        <h1> 🌆</h1>
+        <h3 id="departmentImage">{departmentImage}</h3>
       </div>
-      <select id="departmentSelect" value={currentDepartment} onChange={changeDepartment}>
-        <option value="department" >Department</option>
-        {departmentOptions}
-      </select>
-      <ul className="categoryItems" onClick={changeCategory}>
-        {categoryListItems}
-      </ul>
+      <input type="text" id="productSearchBox" placeholder="search product" onChange={searchShirts}/>
+      <div className="productFilters">
+        <select id="departmentSelect" value={currentDepartment} onChange={changeDepartment}>
+          {departmentOptions}
+          <option value={'all'} >{'All Departments'}</option>
+        </select>
+        <ul className="categoryItems">
+          {categoryListItems}
+          <li className="categoryItem" onClick={fetchAllProducts}> All Shirts </li>
+        </ul>
+      </div>
     </div>
   )
 }
@@ -47,7 +53,8 @@ catSideNav.propTypes = {
   changeDepartment: propTypes.func.isRequired,
   currentDepartment: propTypes.string.isRequired,
   changeCategory: propTypes.func.isRequired,
-  fetchAllProducts: propTypes.func.isRequired
+  fetchAllProducts: propTypes.func.isRequired,
+  searchShirts: propTypes.func.isRequired,
 };
 
 export default catSideNav;

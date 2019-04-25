@@ -80,11 +80,10 @@ class CategoryController {
    * @return { json }  message
    */
   static getCategories(req, res) {
+    let filter = (req.params.departmentId == 'all') ? {} : {departmentId: req.params.departmentId}
     return Category
       .findAll({
-        where: {
-          departmentId: req.params.departmentId
-        }
+        where: filter
       })
       .then((categories) => {
         if (categories.length == 0) {

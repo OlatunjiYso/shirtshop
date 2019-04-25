@@ -1,16 +1,17 @@
 import {
-  SET_DEPARTMENT, SET_DEPARTMENTS, SET_CATEGORY, SET_CATEGORIES, SET_SHIRTS, SET_CURRENT_SHIRT,
+  SET_DEPARTMENT, SET_DEPARTMENTS, SET_CATEGORY, SET_CATEGORIES, SET_SHIRTS, SET_CURRENT_SHIRT, SET_SEARCH_SHIRTS
 } from '../actions/types';
 
 
 const initialState = {
-  currentDepartment: 'id',
+  currentDepartment: '1',
   departments: [],
   categories: [],
   currentCategory: 'All',
   shirts: [],
   currentShirt: null,
-  pages: 8
+  pages: 8,
+  shirtsComingFromSearch: false
 };
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -28,7 +29,8 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         currentCategory: action.currentCategory,
-        shirts: action.shirts
+        shirts: action.shirts,
+        shirtsComingFromSearch: false
       };
     case SET_CATEGORIES:
       return {
@@ -39,13 +41,22 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         shirts: action.shirts,
-        pages: action.pages
+        pages: action.pages,
+        shirtsComingFromSearch: false,
+        currentCategory: action.currentCategory,
       };
     case SET_CURRENT_SHIRT:
       return {
         ...state,
         currentShirt: action.chosenShirt
       };
+    case SET_SEARCH_SHIRTS:
+    return {
+      ...state,
+      shirts: action.shirts,
+      shirtsComingFromSearch: true,
+      currentCategory: action.currentCategory,
+    }
 
     default:
       return state;

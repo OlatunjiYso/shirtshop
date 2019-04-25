@@ -203,7 +203,7 @@ class Validations {
    * 
    */
   static validateFetchCategories(req, res, next) {
-    let departmentId = parseInt(req.params.departmentId);
+    let departmentId = req.params.departmentId;
     if  (!departmentId || departmentId == undefined) {
       return res.status(400)
       .json({

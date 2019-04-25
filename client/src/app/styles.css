@@ -178,37 +178,43 @@ main {
 /* catalog side nav styles */
 
 .catSideNavBody {
-  background: rgb(241, 241, 241);
+  background: rgb(255, 246, 251);
   min-height: 600px;
   width: 250px;
   display: flex;
   flex-direction:column;
+  padding: 0 0 30px 0;
 }
 .departmentpics {
   flex: 1;
 }
-.departmentpics h1 {
+#departmentImage {
   margin: 20px 5px 0 5px;
-  font-size: 6em;
+  font-size: 5em;
   text-align: center;
 }
 #departmentSelect {
-  height: 40px;
+  height: 30px;
   font-size: 15px;
   margin: 5px auto;
-  width: 70%;
+  width: 80%;
   display: block;
+}
+.productFilters {
+  flex: 4;
+  border: 1px solid rgb(190, 190, 190);
+  padding:20px 0 0 0;
+  width: 80%;
+  margin: 1px auto;
 }
 .categoryItems {
   display: block;
-  flex: 1;
   padding: 0;
 }
  .categoryItem {
   border: 1px solid black;
-  background: rgb(235, 235, 235);
   list-style-type: none;
-  width:70%;
+  width:80%;
   margin: 20px auto;
   padding: 4px 4px;
   text-align: center;
@@ -218,6 +224,16 @@ main {
 .categoryItem:hover {
   background: rgb(124, 30, 66);
   color: white;
+}
+#productSearchBox {
+  height: 30px;
+  border: 1px solid rgb(97, 5, 55);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 15px;
+  margin: 5px auto 50px auto;
+  width: 70%;
+  display: block;
 }
 
 /* Catalog styles  */
