@@ -13,7 +13,9 @@ const catalog = (props) => {
     changeDepartment,
     currentCategory,
     changeCategory,
-    fetchAllProducts } = props;
+    fetchAllProducts,
+    searchShirts,
+    shirtsComingFromSearch } = props;
 
   let shirtCards = shirts.map((shirt) => {
     let { id, name, image, price } = shirt
@@ -27,6 +29,11 @@ const catalog = (props) => {
       />
     )
   })
+
+  const shirtsToBeDisplayed = (shirtCards.length > 0) ? shirtCards : <h3> No shirt found</h3>
+
+  const catalogHeader = (!shirtsComingFromSearch) ?
+    <p className="catalogCardHeader"> {currentCategory} T-shirts for you!</p> : <p className="catalogCardHeader"> Search results</p>
   return (
     <div className="catalogBody">
       <div className="catalogSearch">
@@ -37,17 +44,18 @@ const catalog = (props) => {
           currentDepartment={currentDepartment}
           changeCategory={changeCategory}
           fetchAllProducts= {fetchAllProducts}
+          searchShirts={searchShirts}
+          
         />
       </div>
       <div className="catalogCardsSection">
-        <p className="catalogCardHeader"> {currentCategory} T-shirts for you!</p>
+      { catalogHeader }
         <div className="catalogCards">
-          {shirtCards}
+       { shirtsToBeDisplayed }
         </div>
       </div>
     </div>
   )
-
 }
 
 catalog.propTypes = {
@@ -58,7 +66,9 @@ catalog.propTypes = {
   currentDepartment: propTypes.string.isRequired,
   currentCategory: propTypes.string.isRequired,
   changeCategory: propTypes.func.isRequired,
-  fetchAllProducts: propTypes.func.isRequired
+  fetchAllProducts: propTypes.func.isRequired,
+  searchShirts: propTypes.func.isRequired,
+  shirtsComingFromSearch: propTypes.bool,
 };
 
 export default catalog;

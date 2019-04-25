@@ -177,7 +177,7 @@ class ProductsController {
 
   static searchProduct(req, res) {
     const Op = Sequelize.Op;
-    const  {searchItem}  = req.body
+    const  {searchItem}  = req.query
     Product
     .findAll({
       where: {

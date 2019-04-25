@@ -1,7 +1,7 @@
 import productService from '../service/productService';
 
 import {
-  SET_DEPARTMENT, SET_DEPARTMENTS, SET_CATEGORY, SET_CATEGORIES, SET_SHIRTS, SET_CURRENT_SHIRT,
+  SET_DEPARTMENT, SET_DEPARTMENTS, SET_CATEGORY, SET_CATEGORIES, SET_SHIRTS, SET_CURRENT_SHIRT, SET_SEARCH_SHIRTS
 } from './types';
 
 export const setDepartment = chosenDepartment => ({
@@ -28,7 +28,14 @@ export const setCategories = foundCategories => ({
 export const setShirts = (foundShirts, pages) => ({
   type: SET_SHIRTS,
   shirts: foundShirts,
+  currentCategory: 'All',
   pages
+});
+
+export const setSearchShirts = (foundShirts) => ({
+  type: SET_SEARCH_SHIRTS,
+  shirts: foundShirts,
+  currentCategory: 'Search',
 });
 
 export const setCurrentShirt = chosenShirt => ({
@@ -59,6 +66,20 @@ export const fetchAllShirts = (pageNumber) => (dispatch) => {
       const shirts = response.data.products;
       const { pages } = response.data;
       dispatch(setShirts(shirts, pages));
+    })
+    .catch(() => {
+      return null
+    });
+};
+
+/**
+ * @description - fetches a shirt from database and update state.
+ */
+export const searchShirts = (keyword) => (dispatch) => {
+  return productService.searchProduct(keyword)
+    .then((response) => {
+      const shirts = response.data.foundProducts;
+      dispatch(setSearchShirts(shirts));
     })
     .catch(() => {
       return null
