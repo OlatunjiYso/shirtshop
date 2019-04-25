@@ -1,6 +1,6 @@
 # Shirtshop 👚 👕 📦 👖👗
 
-##### Live app  [here](https://shirtshopz.herokuapp.com)
+#### Live app  [here](https://shirtshopz.herokuapp.com)
 
 ## Shirtshop is an e-commerce site that allows users to do the following :
 - view shirts by categories.
