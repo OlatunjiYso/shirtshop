@@ -15,7 +15,7 @@
 
 
 
-## Getting Started
+## Getting Started 🤓
 #### Fork/Clone the Repo
 `change directory to the git repository by doing cd shirtshop`
 
