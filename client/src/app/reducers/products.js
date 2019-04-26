@@ -4,14 +4,13 @@ import {
 
 
 const initialState = {
-  currentDepartment: '1',
+  currentDepartment: 'all',
   departments: [],
   categories: [],
-  currentCategory: 'All',
+  currentCategory: 'all',
   shirts: [],
   currentShirt: null,
-  pages: 8,
-  shirtsComingFromSearch: false
+  pages: 1,
 };
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,7 +29,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         currentCategory: action.currentCategory,
         shirts: action.shirts,
-        shirtsComingFromSearch: false
+        pages: action.pages
       };
     case SET_CATEGORIES:
       return {
@@ -42,7 +41,6 @@ const productReducer = (state = initialState, action) => {
         ...state,
         shirts: action.shirts,
         pages: action.pages,
-        shirtsComingFromSearch: false,
         currentCategory: action.currentCategory,
       };
     case SET_CURRENT_SHIRT:
@@ -54,8 +52,8 @@ const productReducer = (state = initialState, action) => {
     return {
       ...state,
       shirts: action.shirts,
-      shirtsComingFromSearch: true,
       currentCategory: action.currentCategory,
+      pages: action.pages
     }
 
     default:

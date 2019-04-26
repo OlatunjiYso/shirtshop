@@ -20,11 +20,15 @@ class ProductCatalog extends Component {
     super(props);
     this.state = {
       currentPage: 1,
+      searchKeyword: '',
+      currentCategoryId: 1
     }
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
-    this.getPaginatedView = this.getPaginatedView.bind(this);
     this.searchShirts = this.searchShirts.bind(this);
+    this.getPaginatedShirts = this.getPaginatedShirts.bind(this);
+    this.getPaginatedCategoryShirts = this.getPaginatedCategoryShirts.bind(this);
+    this.getPaginatedSearchShirts = this.getPaginatedSearchShirts.bind(this);
   }
  /**
    * @description - runs after page loads
@@ -33,7 +37,7 @@ class ProductCatalog extends Component {
     const pageNumber = this.state.currentPage
     this.props.fetchAllShirts(pageNumber);
     this.props.fetchDepartments();
-    this.props.fetchCategories(1);
+    this.props.fetchCategories('all');
   }
   /**
    * @description handles change department
@@ -58,30 +62,62 @@ class ProductCatalog extends Component {
    * @returns {func} funtion
    */
   changeCategory(event) {
-   const { value } = event.target;
-   this.props.fetchProductsInCategory(value);
+   const categoryId = event.target.value;
+   this.setState({
+    ...this.state,
+    currentCategoryId: categoryId,
+    currentPage: 1
+  })
+   this.props.fetchProductsInCategory(categoryId);
   }
 
   /**
-   * @description - fetches a paginated view
+   * @description - fetches a paginated view of all shirts
    */
-  getPaginatedView(pageNumber) {
-    this.props.fetchAllShirts(pageNumber);
+  getPaginatedShirts(pageNumber) {
     this.setState({
       ...this.state, currentPage: pageNumber
     })
+    this.props.fetchAllShirts(pageNumber);
+  } 
+
+  /**
+   * @description - fetches a paginated view of category shirts
+   */
+  getPaginatedCategoryShirts(pageNumber) {
+    const categoryId = this.state.currentCategoryId;
+    this.setState({
+      ...this.state, currentPage: pageNumber
+    })
+    this.props.fetchProductsInCategory(categoryId, pageNumber);
+  } 
+
+  /**
+   * @description - fetches a paginated view of search shirts
+   */
+  getPaginatedSearchShirts(pageNumber) {
+    const searchKeyword = this.state.searchKeyword;
+    this.setState({
+      ...this.state, currentPage: pageNumber
+    })
+    this.props.searchShirts(searchKeyword, pageNumber);
   } 
 
   /**
    * @description - search for shirt by keyword
    */
   searchShirts(event) {
-    const { value } = event.target;
-    this.props.searchShirts(value);
+    const searchWord = event.target.value;
+    this.setState({
+      ...this.state,
+       searchKeyword: searchWord,
+       currentPage: 1
+    })
+    this.props.searchShirts(searchWord);
   } 
 
   render() {
-   let  { categories, departments, shirts, currentDepartment, currentCategory, pages, shirtsComingFromSearch } = this.props.productData;
+   let  { categories, departments, shirts, currentDepartment, currentCategory, pages } = this.props.productData;
    const fetchAllProducts = this.props.fetchAllShirts
     return (
       <div>
@@ -95,15 +131,14 @@ class ProductCatalog extends Component {
         currentCategory={currentCategory}
         fetchAllProducts ={fetchAllProducts}
         searchShirts = {this.searchShirts}
-        shirtsComingFromSearch= {shirtsComingFromSearch}
         />
         <Pagination
          pages= {pages}
-         getPaginatedView={this.getPaginatedView}
+         getPaginatedShirts={this.getPaginatedShirts}
+         getPaginatedCategoryShirts={this.getPaginatedCategoryShirts}
+         getPaginatedSearchShirts={this.getPaginatedSearchShirts}
          currentCategory={currentCategory}
          currentPage= {this.state.currentPage}
-         shirtsComingFromSearch= {shirtsComingFromSearch}
-
          />
       </div>
     )
@@ -112,6 +147,7 @@ class ProductCatalog extends Component {
 
 const mapStateToProps = state => {
   const productData = state.products;
+  console.log(productData);
   return {
     productData
   };
