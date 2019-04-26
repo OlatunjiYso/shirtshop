@@ -22,11 +22,9 @@ class CartController {
   static createCartItem(req, res) {
 
     const { productId, attributes, quantity, buyNow } = req.body;
-    const { id } = req.user;
     ShoppingCart
       .create({
           productId,
-          customerId: id,
           attributes,
           quantity,
           buyNow
@@ -53,11 +51,12 @@ class CartController {
    * @param { object } res - response object
    */
   static getMyCartItems(req, res) {
-
+    const { cartItems }= req.query;
+    let cartItemsArray = cartItems.split(',')
     ShoppingCart
       .findAndCountAll({
         where: {
-          customerId: req.user.id
+          id: cartItemsArray
         },
         include: [
           { model: Product }

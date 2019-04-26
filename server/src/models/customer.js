@@ -68,11 +68,6 @@ export default (sequelize, DataTypes) => {
   Customer.hasMany(models.Review, {
     as: 'reviews'
   });
-  Customer.belongsToMany(models.Product, {
-    through: 'ShoppingCart',
-    foreignKey: 'customerId',
-    as: 'customer'
-  });
   };
   return Customer;
 };

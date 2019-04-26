@@ -43,11 +43,6 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'productId',
       as: 'attributes'
     });
-    Product.belongsToMany(models.Customer, {
-      through: 'ShoppingCart',
-      foreignKey: 'productId',
-      as: 'customers'
-    });
     Product.hasMany(models.OrderDetail, {
       as: 'orders',
     });

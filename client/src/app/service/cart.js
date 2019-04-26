@@ -12,9 +12,11 @@ class CartService {
     const url = `${rootUrl}/`;
     axios.post(url, item)
     .then((res) => {
+      let cartItems = localStorage.getItem('cartItemsIds') || '';
+      cartItems += res.data.cartItem.id + ','
+      localStorage.setItem('cartItemsIds', cartItems);
       alertify.set('notifier', 'position', 'top-center');
       alertify.success(res.data.message);
-      
     })
     .catch((err) => {
       alertify.set('notifier', 'position', 'top-center');
@@ -27,8 +29,8 @@ class CartService {
    * @description fetches all cart items
    *  
    */
-  static getItems() {
-   return axios.get(`${rootUrl}/`);
+  static getItems(cartItemsIds) {
+   return axios.get(`${rootUrl}/`, {params: {cartItems: cartItemsIds}});
   }
 
 

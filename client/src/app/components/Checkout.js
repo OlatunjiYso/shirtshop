@@ -61,8 +61,13 @@ class Checkout extends Component {
    * @memberof Checkout component
    */
   render() {
+    if (this.props.location.state == undefined) {
+      return ( <h2 className="centeredText">
+       Please login to purchase . . . . .  
+       </h2>);
+    }
     let total = 0;
-    const allItems = this.props.location.state.preparedItems;
+    const allItems = this.props.location.state.preparedItems || [];
     const orderItems = allItems.map((item, index) => {
       const { attributes, name, quantity, price } = item;
       let attributesArray = attributes.split(',');
@@ -84,6 +89,7 @@ class Checkout extends Component {
         </div>
       )
     })
+
     return (
       <div>
         <h3 className="orderTitle"> Order summary </h3>

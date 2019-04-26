@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom'
 import CartItem from './CartItem';
 
 const CartItems = (props) => {
-  const { removeItem, cartItems, count, preparedItems } = props;
+  const { removeItem, cartItems, count, preparedItems, loggedIn } = props;
 
 if (cartItems.length > 0) {
   // Generate cart Items
   const allCartItems = cartItems.map((item) => {
     const { attributes, quantity, id } = item
     const { name, price, image } = item.Product;
-
     return (
       <CartItem
         name={name}
@@ -26,6 +25,17 @@ if (cartItems.length > 0) {
       />
     )
   })
+
+  const payOrRedirect = (loggedIn)?
+   ( <div>
+    <Link to={{
+      pathname: '/checkout',
+      state: {
+        preparedItems
+      }
+    }}
+    id="cartBuyAll">Buy All</Link>
+  </div>) : <h2 className="centeredText"> Please login to purchase</h2>
   return (
     <div >
       <div id="cartHeader">
@@ -34,16 +44,7 @@ if (cartItems.length > 0) {
       <div id="cartItemsBody">
         {allCartItems}
       </div>
-      <div>
-       
-        <Link to={{
-          pathname: '/checkout',
-          state: {
-            preparedItems
-          }
-        }}
-        id="cartBuyAll">Buy All</Link>
-      </div>
+     {payOrRedirect}
     </div>
   )
 } else {
@@ -58,5 +59,6 @@ CartItems.propTypes = {
   cartItems: PropTypes.array.isRequired,
   count: PropTypes.number,
   preparedItems: PropTypes.any.isRequired,
+  loggedIn: PropTypes.bool,
 };
 export default CartItems;

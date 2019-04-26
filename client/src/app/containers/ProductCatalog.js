@@ -147,7 +147,6 @@ class ProductCatalog extends Component {
 
 const mapStateToProps = state => {
   const productData = state.products;
-  console.log(productData);
   return {
     productData
   };

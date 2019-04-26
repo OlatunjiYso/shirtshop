@@ -16,9 +16,11 @@ export const setPreparedItems = preparedItems => ({
 
 /**
  * @description - fetches all cartItems for a user.
+ * 
  */
 export const fetchCartItems = () => (dispatch) => {
-  return cartService.getItems()
+  const cartItemsIds = localStorage.getItem('cartItemsIds') || '';
+  return cartService.getItems(cartItemsIds)
     .then((response) => {
       const items = response.data.cartItems['rows'];
       const count = response.data.cartItems['count'];
