@@ -32,22 +32,25 @@ Create a .env file in the root directory of the repo
 
 Add the following environmental variables:
 
-LOCAL_DB_USERNAME =  Your local database username
-LOCAL_TEST_DB_USERNAME =  Your test database username
+`LOCAL_DB_USERNAME` =  Your local database username
 
-LOCAL_DB_PASSWORD = Your local database password
-LOCAL_TEST_DB_PASSWORD = Your test database password
+`LOCAL_TEST_DB_USERNAME` =  Your test database username
 
-LOCAL_DB = Name of the database you want to use for development
-OCAL_TEST_DB = Name of the database you want to use for test.
+`LOCAL_DB_PASSWORD` = Your local database password
 
-SECRET_KEY = Your JSON web token secret key 
+`LOCAL_TEST_DB_PASSWORD` = Your test database password
 
-EMAIL_PASS = password of the google mail account used for nodemailer
+`LOCAL_DB` = Name of the database you want to use for development
 
-NODE_ENV = node environment, could be test | development | production
+`LOCAL_TEST_DB` = Name of the database you want to use for test.
 
-PORT = Port the express server listens to
+`SECRET_KEY` = Your JSON web token secret key 
+
+`EMAIL_PASS` = password of the google mail account used for nodemailer
+
+`NODE_ENV` = node environment, could be test | development | production
+
+`PORT` = Port the express server listens to
 
 
 ### Populate local database with necessary tables and columns
