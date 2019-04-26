@@ -20,7 +20,7 @@ class CategoryController {
   static getCategoryProducts(req, res) {
     const filter = {};
     let foundProducts = [];
-      filter.categoryId = req.query.category_id;
+    filter.categoryId = req.query.category_id;
     ProductCategory
       .findAll({
         where: filter
@@ -37,35 +37,51 @@ class CategoryController {
           productIdArray.push(categoryProduct.productId)
         });
         Product
-          .findAll({
+          .findAndCountAll({
             where: {
               id: productIdArray
             }
           })
-          .then((products) => {
-            foundProducts = products;
-          })
-          .then(() => {
-            Category
-              .findOne({
-                where: {
-                  id: req.query.category_id
-                }
-              })
-              .then((category) => {
-                res.status(200)
-                  .json({
-                    message: 'products found!',
-                    category: category.name,
-                    products: foundProducts
-                  })
-              })
-          })
-          .catch((err) => {
-            return res.status(500)
-              .json({
-                error: err.message
-              })
+          .then((foundcategoryProducts) => {
+            const limit = parseInt(req.query.limit) || 12;
+            const { page } = req.query;
+            const pages = Math.ceil(foundcategoryProducts.count / limit);
+            let offset = (page > 1) ? limit * (page - 1) : 0;
+
+            Product.findAll({
+              where: {
+                id: productIdArray
+              },
+              limit,
+              offset
+            })
+            .then((products) => {
+              foundProducts = products;
+            })
+            .then(() => {
+              Category
+                .findOne({
+                  where: {
+                    id: req.query.category_id
+                  }
+                })
+                .then((category) => {
+                  res.status(200)
+                    .json({
+                      message: 'products found!',
+                      category: category.name,
+                      products: foundProducts,
+                      pages
+                    })
+                })
+            })
+
+          })  
+      })
+      .catch((err) => {
+        return res.status(500)
+          .json({
+            error: err.message
           })
       })
   }
@@ -80,7 +96,7 @@ class CategoryController {
    * @return { json }  message
    */
   static getCategories(req, res) {
-    let filter = (req.params.departmentId == 'all') ? {} : {departmentId: req.params.departmentId}
+    let filter = (req.params.departmentId == 'all') ? {} : { departmentId: req.params.departmentId }
     return Category
       .findAll({
         where: filter

@@ -9,7 +9,7 @@ let client;
   client = redis.createClient()
  }
 let redisMiddleware = (req, res, next) => {
-  let key = "__express__" + req.originalUrl || req.url;
+  let key = "__expres__" + req.originalUrl || req.url;
   client.get(key, function (err, reply) {
     if (reply) {
       let jsonReply= JSON.parse(reply)
@@ -17,7 +17,7 @@ let redisMiddleware = (req, res, next) => {
     } else {
       res.sendResponse = res.send;
       res.send = (body) => {
-        client.set(key, JSON.stringify(body),'EX', 1800);
+        client.set(key, JSON.stringify(body),'EX', 10);
         res.sendResponse(body);
       }
       next();

@@ -43,7 +43,6 @@ app.use((req, res, next) => {
 
 // Route incoming request to appropriate handlers
 app.use('/api/v1/customers/', customerHandler);
-app.use('/api/v1/products/search', productHandler);
 app.use('/api/v1/products/', productHandler);
 app.use('/api/v1/categories/products', categoryHandler);
 app.use('/api/v1/categories/', categoryHandler);

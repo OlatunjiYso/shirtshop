@@ -15,8 +15,9 @@ class ProductService {
    /**
  * @description search for product
  */
-static searchProduct(keyword) {
-  const url = `${rootUrl}/search/products?searchItem=${keyword}`;
+static searchProduct(keyword, pageNumber) {
+  let page = pageNumber || 1;
+  const url = `${rootUrl}/search/products?searchItem=${keyword}&page=${page}`;
   return axios.get(url);
 }
 
@@ -33,8 +34,9 @@ static fetchSpecifiedProduct(productId) {
  * @description fetches all shirts in a category
  * @param {Integer} categoryId
  */
-static fetchProductsInCategory(categoryId) {
-  const url = `${rootUrl}/categories/products/?category_id=${categoryId}`;
+static fetchProductsInCategory(categoryId, pageNumber) {
+  let page = pageNumber || 1;
+  const url = `${rootUrl}/categories/products/?category_id=${categoryId}&page=${page}`;
   return axios.get(url);
 }
 

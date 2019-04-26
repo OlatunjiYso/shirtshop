@@ -26,7 +26,7 @@ const catSideNav = (props) => {
       </li>
     )
   })
-  let departmentImage = (currentDepartment === '1') ? ' 🏁' : (currentDepartment === '2') ? '🌴' : '🌤'
+  let departmentImage = (currentDepartment === '1') ? ' 🏁' : (currentDepartment === '2') ? '🌴' : (currentDepartment === '2')?'🌤': '👕'
   return (
     <div className="catSideNavBody">
       <div className="departmentpics">
@@ -34,10 +34,12 @@ const catSideNav = (props) => {
       </div>
       <input type="text" id="productSearchBox" placeholder="search product" onChange={searchShirts}/>
       <div className="productFilters">
+      <h4 className="centeredText"> Department </h4>
         <select id="departmentSelect" value={currentDepartment} onChange={changeDepartment}>
+        <option value={'all'} >{'All Departments'}</option>
           {departmentOptions}
-          <option value={'all'} >{'All Departments'}</option>
         </select>
+        <h4 className="centeredText"> Categories </h4>
         <ul className="categoryItems">
           {categoryListItems}
           <li className="categoryItem" onClick={fetchAllProducts}> All Shirts </li>

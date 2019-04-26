@@ -14,10 +14,11 @@ export const setDepartments = foundDepartments => ({
   departments: foundDepartments
 });
 
-export const setCategory = (chosenCategory, foundShirts) => ({
+export const setCategory = (chosenCategory, foundShirts, pages) => ({
   type: SET_CATEGORY,
   currentCategory: chosenCategory,
   shirts: foundShirts,
+  pages
 });
 
 export const setCategories = foundCategories => ({
@@ -28,14 +29,15 @@ export const setCategories = foundCategories => ({
 export const setShirts = (foundShirts, pages) => ({
   type: SET_SHIRTS,
   shirts: foundShirts,
-  currentCategory: 'All',
+  currentCategory: 'all',
   pages
 });
 
-export const setSearchShirts = (foundShirts) => ({
+export const setSearchShirts = (foundShirts, pages) => ({
   type: SET_SEARCH_SHIRTS,
   shirts: foundShirts,
-  currentCategory: 'Search',
+  currentCategory: 'search',
+  pages
 });
 
 export const setCurrentShirt = chosenShirt => ({
@@ -75,11 +77,12 @@ export const fetchAllShirts = (pageNumber) => (dispatch) => {
 /**
  * @description - fetches a shirt from database and update state.
  */
-export const searchShirts = (keyword) => (dispatch) => {
-  return productService.searchProduct(keyword)
+export const searchShirts = (keyword, pageNumber) => (dispatch) => {
+  return productService.searchProduct(keyword, pageNumber)
     .then((response) => {
       const shirts = response.data.foundProducts;
-      dispatch(setSearchShirts(shirts));
+      const { pages } = response.data;
+      dispatch(setSearchShirts(shirts, pages));
     })
     .catch(() => {
       return null
@@ -103,11 +106,11 @@ export const fetchCategories = (departmentId) => (dispatch) => {
 /**
  * @description - fetches all businesses in a category.
  */
-export const fetchProductsInCategory = (categoryId) => (dispatch) => {
-  return productService.fetchProductsInCategory(categoryId)
+export const fetchProductsInCategory = (categoryId, pageNumber) => (dispatch) => {
+  return productService.fetchProductsInCategory(categoryId, pageNumber)
     .then((response) => {
-      const { category, products } = response.data;
-      dispatch(setCategory(category, products));
+      const { category, products, pages } = response.data;
+      dispatch(setCategory(category, products, pages));
     })
     .catch(() => {
       return null

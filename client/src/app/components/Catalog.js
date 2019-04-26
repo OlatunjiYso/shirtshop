@@ -14,8 +14,7 @@ const catalog = (props) => {
     currentCategory,
     changeCategory,
     fetchAllProducts,
-    searchShirts,
-    shirtsComingFromSearch } = props;
+    searchShirts } = props;
 
   let shirtCards = shirts.map((shirt) => {
     let { id, name, image, price } = shirt
@@ -32,7 +31,7 @@ const catalog = (props) => {
 
   const shirtsToBeDisplayed = (shirtCards.length > 0) ? shirtCards : <h3> No shirt found</h3>
 
-  const catalogHeader = (!shirtsComingFromSearch) ?
+  const catalogHeader = (currentCategory !== 'search') ?
     <p className="catalogCardHeader"> {currentCategory} T-shirts for you!</p> : <p className="catalogCardHeader"> Search results</p>
   return (
     <div className="catalogBody">
@@ -68,7 +67,6 @@ catalog.propTypes = {
   changeCategory: propTypes.func.isRequired,
   fetchAllProducts: propTypes.func.isRequired,
   searchShirts: propTypes.func.isRequired,
-  shirtsComingFromSearch: propTypes.bool,
 };
 
 export default catalog;

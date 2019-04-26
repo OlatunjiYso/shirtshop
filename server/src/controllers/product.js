@@ -144,8 +144,8 @@ class ProductsController {
    * @return { json }  message
    */
   static getAllProducts(req, res) {
-    const limit = 12;
-    let offset = 0;
+    const limit = req.query.limit || 12;
+    let offset;
     Product.findAndCountAll()
       .then((allProducts) => {
         const { page } = req.query;
@@ -175,33 +175,73 @@ class ProductsController {
       });
   }
 
-  static searchProduct(req, res) {
-    const Op = Sequelize.Op;
-    const  {searchItem}  = req.query
-    Product
-    .findAll({
-      where: {
-        name: {
-          [Op.substring]: searchItem
-        }
-      }
-    })
-    .then((foundProducts) => {
-      res.status(200)
-      .json({
-         message: 'items found',
-         foundProducts
-      })
-    })
-    .catch((err) => {
-      res.status(500)
-      .json({
-        message: 'Internal server error',
-        error: err
-      })
-    });
-  }
 
+  /**
+   * @description - searches for product.
+   * @param {object} req - request object
+   * @param {object} res - response object
+   */
+  static searchProduct(req, res) {
+    const limit = req.query.limit || 12;
+    const Op = Sequelize.Op;
+    const { searchItem } = req.query
+    Product
+      .findAndCountAll({
+        where: {
+          [Op.or]: [
+            {
+              name: {
+                [Op.substring]: searchItem
+              }
+            },
+            {
+              description: {
+                [Op.substring]: searchItem
+              }
+            }
+          ]
+        }
+      })
+      .then((matchingProducts) => {
+        const { page } = req.query;
+        const pages = Math.ceil(matchingProducts.count / limit);
+        let offset = (page > 1) ? limit * (page - 1) : 0;
+        Product
+          .findAll({
+            where: {
+              [Op.or]: [
+                {
+                  name: {
+                    [Op.substring]: searchItem
+                  }
+                },
+                {
+                  description: {
+                    [Op.substring]: searchItem
+                  }
+                }
+              ]
+            },
+            limit,
+            offset
+          })
+          .then((foundProducts) => {
+            res.status(200)
+              .json({
+                message: 'items found',
+                foundProducts,
+                pages
+              })
+          })
+      })
+      .catch((err) => {
+        res.status(500)
+          .json({
+            message: 'Internal server error',
+            error: err
+          })
+      });
+  }
 }
 
 export default ProductsController;
