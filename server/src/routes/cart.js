@@ -17,6 +17,12 @@ cartHandler.get(
   cartController.getMyCartItems
 );
 
+// removing bulk cart items
+cartHandler.delete(
+  '/',
+  cartController.removeItem
+)
+
 // removing cart item
 cartHandler.delete(
   '/:cartItemId',

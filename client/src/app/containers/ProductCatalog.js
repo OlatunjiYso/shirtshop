@@ -21,8 +21,9 @@ class ProductCatalog extends Component {
     this.state = {
       currentPage: 1,
       searchKeyword: '',
-      currentCategoryId: 1
+      currentCategoryId: 1,
     }
+    this.timeout = 0;
     this.changeDepartment = this.changeDepartment.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
     this.searchShirts = this.searchShirts.bind(this);
@@ -113,7 +114,11 @@ class ProductCatalog extends Component {
        searchKeyword: searchWord,
        currentPage: 1
     })
-    this.props.searchShirts(searchWord);
+   // Limit the number of times calls is made to server
+   if(this.timeout) clearTimeout(this.timeout);
+   this.timeout = setTimeout(() => {
+     this.props.searchShirts(searchWord);
+   }, 800); 
   } 
 
   render() {

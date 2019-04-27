@@ -90,10 +90,16 @@ class CartController {
    * 
    */
   static removeItem(req, res) {
+    let id;
+    if (req.params.cartItemId) {
+      id = req.params.cartItemId
+    } else {
+      id = req.body.items
+    }
     ShoppingCart
     .destroy({
       where: {
-        id: req.params.cartItemId
+        id
       }
     })
     .then(()=> {

@@ -26,9 +26,9 @@ export const fetchCartItems = () => (dispatch) => {
       const count = response.data.cartItems['count'];
       dispatch(setCartItems(items, count));
       const preparedItems = items.map((item) => {
-        const { attributes, quantity } = item;
+        const { attributes, quantity, id } = item;
         const { name, price } = item.Product;
-        return { attributes, quantity, name, price }
+        return { attributes, quantity, name, price, id }
       })
       dispatch(setPreparedItems(preparedItems))
     })

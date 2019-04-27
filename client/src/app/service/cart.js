@@ -37,6 +37,13 @@ class CartService {
   static removeItem(cartItemId) {
    return axios.delete(`${rootUrl}/${cartItemId}`)
   }
+
+  static bulkRemoveItem( cartItemsIds) {
+    console.log('At the service', cartItemsIds)
+    return axios.delete(`${rootUrl}/`, { data: { items: cartItemsIds } })
+   }
+
+
 }
 
 export default CartService;

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import PaystackButton from 'react-paystack';
 import mailingService from '../service/mailService';
+import cartService from '../service/cart';
 
 /**
  * @class Checkout
@@ -26,6 +27,10 @@ class Checkout extends Component {
    * payment response
    */
   callback (response){
+    const allItems = this.props.location.state.preparedItems;
+    const arraysOfItems = allItems.map((item) => item.id);
+    cartService.bulkRemoveItem(arraysOfItems)
+    .then(()=> {localStorage.setItem('cartItemsIds', '')});
     const text = `Your order was successful!. Your order reference is ${response.reference}`
     const maildetails = {
       from: 'fineshirtshopz@gmail.com',
@@ -67,7 +72,7 @@ class Checkout extends Component {
        </h2>);
     }
     let total = 0;
-    const allItems = this.props.location.state.preparedItems || [];
+    const allItems = this.props.location.state.preparedItems;
     const orderItems = allItems.map((item, index) => {
       const { attributes, name, quantity, price } = item;
       let attributesArray = attributes.split(',');
