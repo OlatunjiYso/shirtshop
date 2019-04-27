@@ -10,10 +10,6 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    customerId: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-    },
     attributes: {
       type: DataTypes.STRING,
       allowNull: false
@@ -31,10 +27,6 @@ export default (sequelize, DataTypes) => {
   ShoppingCart.associate = (models) => {
     ShoppingCart.belongsTo(models.Product, {
       foreignKey: 'productId',
-      onDelete: 'CASCADE',
-    });
-    ShoppingCart.belongsTo(models.Customer, {
-      foreignKey: 'CustomerId',
       onDelete: 'CASCADE',
     });
   };

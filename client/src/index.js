@@ -10,7 +10,6 @@ import 'alertifyjs/build/css/themes/default.min.css';
 import store from './store';
 import setToken from './app/helpers/authorization';
 import setCurrentCustomer from './app/actions/customers';
-
 if (localStorage.token) {
   setToken(localStorage.token);
   store.dispatch(setCurrentCustomer({loggedIn: true}));

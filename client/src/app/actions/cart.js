@@ -16,17 +16,19 @@ export const setPreparedItems = preparedItems => ({
 
 /**
  * @description - fetches all cartItems for a user.
+ * 
  */
 export const fetchCartItems = () => (dispatch) => {
-  return cartService.getItems()
+  const cartItemsIds = localStorage.getItem('cartItemsIds') || '';
+  return cartService.getItems(cartItemsIds)
     .then((response) => {
       const items = response.data.cartItems['rows'];
       const count = response.data.cartItems['count'];
       dispatch(setCartItems(items, count));
       const preparedItems = items.map((item) => {
-        const { attributes, quantity } = item;
+        const { attributes, quantity, id } = item;
         const { name, price } = item.Product;
-        return { attributes, quantity, name, price }
+        return { attributes, quantity, name, price, id }
       })
       dispatch(setPreparedItems(preparedItems))
     })

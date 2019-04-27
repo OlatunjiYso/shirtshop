@@ -37,9 +37,9 @@ const appnav = (props) => {
           </Link>
         </div>
         <ul className="rightNavbar">
+          <li className="navItem"><Link to="/cart" className="white-link"> My Cart </Link></li>
           <li className="navItem"><Link to="/login" className="white-link"> Login </Link></li>
           <li className="navItem"> <Link to="/signup" className="white-link"> Signup </Link> </li>
-          <li className="navItem"> Promo Deals </li>
         </ul>
       </div>
     )

@@ -38,6 +38,12 @@ class Cart extends Component {
   removeItem(cartItemId) {
    cartService.removeItem(cartItemId)
    .then((res) => {
+     let cartItems = localStorage.getItem('cartItemsIds');
+     let cartItemArray = cartItems.split(',');
+     let newCartItems = cartItemArray.filter((item) => {
+       return item != cartItemId
+     });
+     localStorage.setItem('cartItemsIds', newCartItems);
     this.props.fetchCartItems()
     alertify.set('notifier', 'position', 'top-center');
     alertify.success(res.data.message);
@@ -59,6 +65,7 @@ class Cart extends Component {
   render() {
     const { cartItems, count } = this.props.cartData;
     const { preparedItems } = this.props.cartData;
+    const { loggedIn } = this.props.userData.customer;
     return (
       <main id="cartPage">
         <CartItems
@@ -66,6 +73,7 @@ class Cart extends Component {
           cartItems={cartItems}
           preparedItems={preparedItems}
           count={count}
+          loggedIn={loggedIn}
 
         />
       </main>
@@ -76,8 +84,9 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   const cartData = state.carts;
+  const userData = state.customers;
   return {
-    cartData
+    cartData, userData
   };
 };
 
