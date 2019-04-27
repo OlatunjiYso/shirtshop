@@ -17,7 +17,7 @@ let redisMiddleware = (req, res, next) => {
     } else {
       res.sendResponse = res.send;
       res.send = (body) => {
-        client.set(key, JSON.stringify(body),'EX', 10);
+        client.set(key, JSON.stringify(body),'EX', 1200);
         res.sendResponse(body);
       }
       next();
